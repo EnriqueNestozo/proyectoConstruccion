@@ -44,6 +44,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -58,20 +59,18 @@ public class Login extends javax.swing.JFrame {
 
         txtName.setBackground(new java.awt.Color(0, 173, 79));
         txtName.setForeground(new java.awt.Color(255, 255, 255));
-        txtName.setBorder(null);
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 130, -1));
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 140, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 235, 140, 10));
 
         txtPassword.setBackground(new java.awt.Color(0, 173, 79));
         txtPassword.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassword.setBorder(null);
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
             }
         });
-        getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 130, -1));
+        getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 140, -1));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 275, 140, 10));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/images/user.png"))); // NOI18N
@@ -81,7 +80,6 @@ public class Login extends javax.swing.JFrame {
         BotonSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(255, 255, 255));
         BotonSalir.setText("Salir");
-        BotonSalir.setBorder(null);
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSalirActionPerformed(evt);
@@ -93,7 +91,6 @@ public class Login extends javax.swing.JFrame {
         BotonAccesar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         BotonAccesar.setForeground(new java.awt.Color(255, 255, 255));
         BotonAccesar.setText("Accesar");
-        BotonAccesar.setBorder(null);
         BotonAccesar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonAccesarActionPerformed(evt);
@@ -116,7 +113,7 @@ public class Login extends javax.swing.JFrame {
         try{
             if(authentication.getAutorization(txtName.getName(),txtPassword.getPassword().toString())){
                 if(authentication.typeOfUser() == 0){
-                    new MenuCoordinator();
+                    new MenuRecepcionista();
                 }else{
                     new MenuAlumno();
                 }

@@ -6,6 +6,7 @@
 package proyectocadi;
 
 import gui.Login;
+import gui.MenuAlumno;
 
 /**
  *
@@ -20,6 +21,8 @@ public class ProyectoCADI {
         // TODO code application logic here
         Login login = new Login();
         login.setVisible(true);
+        MenuAlumno menu = new MenuAlumno();
+        menu.setVisible(true);
     }
     
 }

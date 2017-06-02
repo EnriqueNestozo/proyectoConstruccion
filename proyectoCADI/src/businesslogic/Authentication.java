@@ -5,7 +5,7 @@
  */
 package businesslogic;
 
-import dataaccess.DataConection;
+import dataaccess.ConexionBD;
 
 /**
  *
@@ -21,7 +21,7 @@ public class Authentication {
     public boolean getAutorization(String usuario, String contrasena) throws Exception{
         boolean bolLogin = false;
         try{  
-            DataConection conexion = new DataConection(usuario, contrasena);
+            ConexionBD conexion = new ConexionBD(usuario, contrasena);
             if (conexion.StateOfConection()){
                 //conexion.closerConection();
                 bolLogin = true;

@@ -9,12 +9,12 @@ package gui;
  *
  * @author Enrique
  */
-public class MenuCoordinator extends javax.swing.JFrame {
+public class MenuCoordinador extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuCoordinator
      */
-    public MenuCoordinator() {
+    public MenuCoordinador() {
         initComponents();
     }
 
@@ -40,7 +40,8 @@ public class MenuCoordinator extends javax.swing.JFrame {
         BotonRegistrarUsuario = new javax.swing.JButton();
         BotonReservaciones = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -186,7 +187,7 @@ public class MenuCoordinator extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonAvisosActionPerformed
 
     private void BotonActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActividadActionPerformed
-         new MenuActividad();
+     new MenuActividad();
     }//GEN-LAST:event_BotonActividadActionPerformed
 
     private void BotonCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCursoActionPerformed
@@ -214,20 +215,21 @@ public class MenuCoordinator extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuCoordinator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuCoordinator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuCoordinator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuCoordinator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuCoordinator().setVisible(true);
+                new MenuCoordinador().setVisible(true);
             }
         });
     }

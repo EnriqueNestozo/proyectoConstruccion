@@ -35,7 +35,7 @@ public class MenuAlumno extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
         setMaximumSize(new java.awt.Dimension(123, 23));
         setName("MenuAlumno"); // NOI18N

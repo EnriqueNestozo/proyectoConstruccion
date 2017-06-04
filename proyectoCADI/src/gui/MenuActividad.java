@@ -16,6 +16,7 @@ public class MenuActividad extends javax.swing.JFrame {
      */
     public MenuActividad() {
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -27,21 +28,81 @@ public class MenuActividad extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        BotonAgregarActividad = new javax.swing.JButton();
+        BotonEliminarActividad = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 153, 204));
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(292, 108));
+
+        BotonAgregarActividad.setBackground(new java.awt.Color(0, 153, 0));
+        BotonAgregarActividad.setForeground(new java.awt.Color(255, 255, 255));
+        BotonAgregarActividad.setText("Agregar Actividad");
+        BotonAgregarActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAgregarActividadActionPerformed(evt);
+            }
+        });
+
+        BotonEliminarActividad.setBackground(new java.awt.Color(0, 153, 0));
+        BotonEliminarActividad.setForeground(new java.awt.Color(255, 255, 255));
+        BotonEliminarActividad.setText("Eliminar Actividad");
+        BotonEliminarActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminarActividadActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BotonAgregarActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonEliminarActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(BotonAgregarActividad)
+                .addGap(18, 18, 18)
+                .addComponent(BotonEliminarActividad)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BotonAgregarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActividadActionPerformed
+        // TODO add your handling code here:
+        new AgregarActividad();
+        dispose();
+    }//GEN-LAST:event_BotonAgregarActividadActionPerformed
+
+    private void BotonEliminarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActividadActionPerformed
+        // TODO add your handling code here:
+        new EliminarActividad();
+        dispose();
+    }//GEN-LAST:event_BotonEliminarActividadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +140,8 @@ public class MenuActividad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAgregarActividad;
+    private javax.swing.JButton BotonEliminarActividad;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

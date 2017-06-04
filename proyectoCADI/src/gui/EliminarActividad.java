@@ -114,7 +114,7 @@ public class EliminarActividad extends javax.swing.JFrame {
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
-        new MensajeConfirmacionBorrado();
+        new MensajeBorrado();
         dispose();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 

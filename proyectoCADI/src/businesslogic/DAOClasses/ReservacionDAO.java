@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ReservacionDAO extends ConexionBD {
     public void crear(){
         try {
-            this.Conectar();
+            this.conectar();
             PreparedStatement estado = this.conexion.prepareStatement("insert into reservacion values(?,?,?,?,?");
             estado.setString(1, null);
             

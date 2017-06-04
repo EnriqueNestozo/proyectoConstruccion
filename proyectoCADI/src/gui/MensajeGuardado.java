@@ -9,14 +9,13 @@ package gui;
  *
  * @author fernandomanuel
  */
-public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
+public class MensajeGuardado extends javax.swing.JPanel {
 
     /**
-     * Creates new form MensajeConfirmacionBorrado
+     * Creates new form ActividadGuardada
      */
-    public MensajeConfirmacionBorrado() {
+    public MensajeGuardado() {
         initComponents();
-        setVisible(true);
     }
 
     /**
@@ -32,8 +31,6 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
         jBotonAceptar = new javax.swing.JButton();
         jLabelMensaje = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         MensajeBorrado.setBackground(new java.awt.Color(0, 153, 204));
 
         jBotonAceptar.setBackground(new java.awt.Color(0, 153, 0));
@@ -45,31 +42,31 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
             }
         });
 
-        jLabelMensaje.setText("Su Actividad Ha Sido Borrada");
+        jLabelMensaje.setText("Su Actividad Ha Sido Guardada");
 
         javax.swing.GroupLayout MensajeBorradoLayout = new javax.swing.GroupLayout(MensajeBorrado);
         MensajeBorrado.setLayout(MensajeBorradoLayout);
         MensajeBorradoLayout.setHorizontalGroup(
             MensajeBorradoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MensajeBorradoLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(62, 62, 62)
                 .addGroup(MensajeBorradoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBotonAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(jLabelMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         MensajeBorradoLayout.setVerticalGroup(
             MensajeBorradoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MensajeBorradoLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
                 .addComponent(jLabelMensaje)
                 .addGap(18, 18, 18)
                 .addComponent(jBotonAceptar)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(MensajeBorrado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -78,8 +75,6 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(MensajeBorrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAceptarActionPerformed
@@ -87,40 +82,6 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jBotonAceptarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MensajeConfirmacionBorrado().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MensajeBorrado;

@@ -12,19 +12,20 @@ public class Actividad {
     private String cupo = "";
     private String horaInicio = "";
     private String horaFin = "";
-    private String fechaCompleta = "";
-    private String dia = "";
-    private String mes = "";
-
-    public String getDia() {
-        return dia;
-    }
-
-    public void setDia(String dia) {
-        this.dia = dia;
-    }
+    private String fechaActividad = "";
     private String area = "";
 
+    public Actividad(String idActividad,String nombreActividad,String descripcion,String cupo,String horaInicio,String horaFin,String fechaActividad,String area) {
+        this.idActividad = idActividad;
+        this.nombreActividad = nombreActividad;
+         this.descripcion = descripcion;
+        this.cupo = cupo;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.fechaActividad = fechaActividad;
+        this.area = area;
+    }
+    
     public String getIdActividad() {
         return idActividad;
     }
@@ -49,8 +50,8 @@ public class Actividad {
         return horaFin;
     }
 
-    public String getFechaCompleta() {
-        return fechaCompleta;
+    public String getFechaActividad() {
+        return fechaActividad;
     }
 
     public String getArea() {
@@ -81,8 +82,8 @@ public class Actividad {
         this.horaFin = horaFin;
     }
 
-    public void setFechaCompleta(String fecha) {
-        this.fechaCompleta = fecha;
+    public void setFechaActividad(String fechaActividad) {
+        this.fechaActividad = fechaActividad;
     }
 
     public void setArea(String area) {

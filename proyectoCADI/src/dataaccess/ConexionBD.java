@@ -5,6 +5,7 @@
  */
 package dataaccess;
 
+import businesslogic.Actividad;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class ConexionBD {
         return estadoDeConexion;
     }
     
-    public void Conectar() throws SQLException{
+    public void conectar() throws SQLException{
         try {
             conexion = DriverManager.getConnection(BD_URL,USUARIO,CONTRASENIA);//"?user=root1&password=123");
             Class.forName(JDBC_DRIVER);
@@ -44,5 +45,10 @@ public class ConexionBD {
             }
         }
         return estadoDeConexion;
+    }
+    public boolean guardarActividad(Actividad actividad) throws SQLException{
+        conectar();
+        
+        
     }
 }

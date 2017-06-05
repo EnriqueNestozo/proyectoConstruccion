@@ -34,7 +34,7 @@ public class ConexionBD {
             Class.forName(JDBC_DRIVER);
             estadoDeConexion = true;
         } catch (Exception ex) {
-            System.out.println("Imposible conectar a la base de datos" + ex.getMessage());
+            System.out.println("Imposible conectar a la base de datos " + ex.getMessage());
         }
     }
     
@@ -46,9 +46,9 @@ public class ConexionBD {
         }
         return estadoDeConexion;
     }
-    public boolean guardarActividad(Actividad actividad) throws SQLException{
+    /*public boolean guardarActividad(Actividad actividad) throws SQLException{
         conectar();
-        
-        
+            
     }
+    */
 }

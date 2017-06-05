@@ -5,7 +5,9 @@
  */
 package gui;
 
-import businesslogic.Authentication;
+import businesslogic.Autenticacion;
+import businesslogic.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,9 +35,9 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        txtPassword = new javax.swing.JPasswordField();
+        txtContrasenia = new javax.swing.JPasswordField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         BotonSalir = new javax.swing.JButton();
@@ -57,20 +59,20 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Contraseña:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
-        txtName.setBackground(new java.awt.Color(0, 173, 79));
-        txtName.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 140, -1));
+        txtNombre.setBackground(new java.awt.Color(0, 173, 79));
+        txtNombre.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 140, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 235, 140, 10));
 
-        txtPassword.setBackground(new java.awt.Color(0, 173, 79));
-        txtPassword.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+        txtContrasenia.setBackground(new java.awt.Color(0, 173, 79));
+        txtContrasenia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtContrasenia.setForeground(new java.awt.Color(255, 255, 255));
+        txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
+                txtContraseniaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 140, -1));
+        getContentPane().add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 140, -1));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 275, 140, 10));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/images/user.png"))); // NOI18N
@@ -109,24 +111,37 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonSalirActionPerformed
 
     private void BotonAccesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAccesarActionPerformed
-        Authentication authentication = new Authentication();
+        Usuario usuario = new Usuario();
+        usuario.setNombreUsuario(txtNombre.getName());
+        usuario.setIdUsuario(txtContrasenia.getName());
+        Autenticacion autenticacion = new Autenticacion();
         try{
-            if(authentication.getAutorization(txtName.getName(),txtPassword.getPassword().toString())){
-                if(authentication.typeOfUser() == 0){
-                    new MenuRecepcionista();
+            if(autenticacion.buscarUsuario(usuario)){
+                if(usuario.getTipo() == "3"){
+                    MenuRecepcionista menuRecepcionista = new MenuRecepcionista();
+                    menuRecepcionista.setVisible(true);
+                    dispose();
                 }else{
-                    new MenuAlumno();
+                    MenuCoordinador menuCoordinador = new MenuCoordinador();
+                    menuCoordinador.setVisible(true);
+                    dispose();
                 }
+            }else{
+                JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña invalidos, intente nuevamente");
+                Login login = new Login();
+                login.setVisible(true);
             }   
         }catch(Exception e){
             System.out.println(e.getMessage());
+        }finally{
+            dispose();
         }
         
     }//GEN-LAST:event_BotonAccesarActionPerformed
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
+    }//GEN-LAST:event_txtContraseniaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,7 +187,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_fondo;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtContrasenia;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

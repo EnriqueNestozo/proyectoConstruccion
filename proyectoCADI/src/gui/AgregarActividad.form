@@ -77,14 +77,14 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jComboBoxHoraFin" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelDospuntosFin" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jComboBoxMinutosFin" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jButtonGuardar" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="63" max="32767" attributes="0"/>
+                          <EmptySpace min="63" pref="6" max="32767" attributes="0"/>
                           <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                       </Group>
@@ -109,8 +109,8 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jComboBoxCurso" pref="84" max="32767" attributes="0"/>
-                              <Component id="TextFieldIDActividad" max="32767" attributes="0"/>
+                              <Component id="TextFieldIDActividad" pref="84" max="32767" attributes="0"/>
+                              <Component id="jComboBoxCurso" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -144,9 +144,9 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelCurso" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBoxCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelArea" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldArea" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -202,6 +202,9 @@
         <Component class="javax.swing.JTextField" name="TextFieldIDActividad">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="idActividad" type="code"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextFieldIDActividadActionPerformed"/>
@@ -211,16 +214,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Curso:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBoxCurso">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;Ingl&#xe9;s I&quot;,&quot;Ingl&#xe9;s II&quot;,&quot;Ingl&#xe9;s III&quot;,&quot;Franc&#xe9;s I&quot;,&quot;Franc&#xe9;s II&quot;,&quot;Franc&#xe9;s III&quot;,&quot;Alem&#xe1;n I&quot;,&quot;Alem&#xe1;n II&quot;,&quot;Alem&#xe1;n III&quot; })" type="code"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxCursoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelNombreActividad">
           <Properties>
@@ -308,6 +301,9 @@
               <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;,&quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot; })" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxInicioHoraActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelDosPuntos">
           <Properties>
@@ -327,11 +323,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxHoraFin">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;,&quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot; })" type="code"/>
-            </Property>
-          </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxMinutosFin">
           <Properties>
@@ -385,6 +376,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldAreaActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxCurso">
         </Component>
       </SubComponents>
     </Container>

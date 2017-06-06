@@ -5,19 +5,36 @@
  */
 package gui;
 import businesslogic.Actividad;
+import businesslogic.Curso;
 import businesslogic.DAOClasses.ActividadDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author fernandomanuel
  */
 public class AgregarActividad extends javax.swing.JFrame {
-
+    ActividadDAO actividadDao = new ActividadDAO();
+    String idActividad;
+    String idCurso;
     /**
      * Creates new form AgregarActividad
      */
     public AgregarActividad() {
+        try {
+            this.idActividad = obtenerIdActividad();
+            this.idCurso = obtenerIdCurso();
+            mostrarCursos();
+        } catch (SQLException ex) {
+            Logger.getLogger(AgregarActividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         initComponents();
+        
         setVisible(true);
     }
 
@@ -34,7 +51,6 @@ public class AgregarActividad extends javax.swing.JFrame {
         jLabelIDACtividad = new javax.swing.JLabel();
         TextFieldIDActividad = new javax.swing.JTextField();
         jLabelCurso = new javax.swing.JLabel();
-        jComboBoxCurso = new javax.swing.JComboBox();
         jLabelNombreActividad = new javax.swing.JLabel();
         jLabelDetalles = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -61,6 +77,7 @@ public class AgregarActividad extends javax.swing.JFrame {
         jComboBoxCupo = new javax.swing.JComboBox();
         jLabelArea = new javax.swing.JLabel();
         jTextFieldArea = new javax.swing.JTextField();
+        jComboBoxCurso = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -70,6 +87,7 @@ public class AgregarActividad extends javax.swing.JFrame {
         jLabelIDACtividad.setText("IdActividad:");
 
         TextFieldIDActividad.setEditable(false);
+        TextFieldIDActividad.setText(idActividad);
         TextFieldIDActividad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextFieldIDActividadActionPerformed(evt);
@@ -77,13 +95,6 @@ public class AgregarActividad extends javax.swing.JFrame {
         });
 
         jLabelCurso.setText("Curso:");
-
-        jComboBoxCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Inglés I","Inglés II","Inglés III","Francés I","Francés II","Francés III","Alemán I","Alemán II","Alemán III" }));
-        jComboBoxCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxCursoActionPerformed(evt);
-            }
-        });
 
         jLabelNombreActividad.setText("Nombre de la Actividad:");
 
@@ -126,14 +137,17 @@ public class AgregarActividad extends javax.swing.JFrame {
         jLabelHoraInicio.setText("Hora inicio:");
 
         jComboBoxInicioHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "7","8","9","10","11","12","13","14","15","16","17","18","19","20" }));
+        jComboBoxInicioHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxInicioHoraActionPerformed(evt);
+            }
+        });
 
         jLabelDosPuntos.setText(":");
 
         jComboBoxInicioMinutos.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59",}));
 
         jLabelHoraFin.setText("Hora Fin:");
-
-        jComboBoxHoraFin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "7","8","9","10","11","12","13","14","15","16","17","18","19","20" }));
 
         jComboBoxMinutosFin.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59",}));
 
@@ -205,7 +219,7 @@ public class AgregarActividad extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBoxMinutosFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButtonGuardar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)
                         .addGap(79, 79, 79))
                     .addComponent(jLabelFecha)
@@ -227,8 +241,8 @@ public class AgregarActividad extends javax.swing.JFrame {
                             .addComponent(jLabelIDACtividad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxCurso, 0, 84, Short.MAX_VALUE)
-                            .addComponent(TextFieldIDActividad))
+                            .addComponent(TextFieldIDActividad, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                            .addComponent(jComboBoxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(50, 50, 50)
                         .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
@@ -253,9 +267,9 @@ public class AgregarActividad extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCurso)
-                    .addComponent(jComboBoxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelArea)
-                    .addComponent(jTextFieldArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombreActividad)
@@ -313,10 +327,6 @@ public class AgregarActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextFieldIDActividadActionPerformed
 
-    private void jComboBoxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxCursoActionPerformed
-
     private void jTextFieldNombreActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActividadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNombreActividadActionPerformed
@@ -344,18 +354,70 @@ public class AgregarActividad extends javax.swing.JFrame {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
-        Actividad actividad = new Actividad(TextFieldIDActividad.getText(), jTextFieldNombreActividad.getText(),jTextAreaDetalles.getText(), String.valueOf(jComboBoxCupo.getItemCount()),
-                String.valueOf(jComboBoxInicioHora.getItemCount()+":"+jComboBoxInicioMinutos.getItemCount()),String.valueOf(jComboBoxHoraFin.getItemCount()+":"+jComboBoxMinutosFin.getItemCount()),
-        String.valueOf(jComboBoxDia.getItemCount()+" "+jComboBoxMes.getItemCount()+" "+jTextFieldAño.getText()),jTextFieldArea.getText());
-       ActividadDAO actividadDao = new ActividadDAO();
-       if(actividadDao.guardaActividad(actividad)){
-           new MensajeGuardado();
-       }
-       else
-           new MensajeBorrado();
+        Actividad actividad = new Actividad(TextFieldIDActividad.getText(), 
+                 jTextFieldNombreActividad.getText(),
+                 jTextAreaDetalles.getText(), 
+                 jComboBoxCupo.getSelectedItem().toString(),
+                 jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),
+                 jComboBoxHoraFin.getSelectedItem().toString()+":"+jComboBoxMinutosFin.getSelectedItem().toString(),
+                 jTextFieldAño.getText()+"-"+jComboBoxMes.getSelectedItem().toString()+"-"+jComboBoxDia.getSelectedItem().toString(),
+                 jTextFieldArea.getText());
+         try {
+             if(!actividadDao.validar(actividad)){
+                 if(actividadDao.guardaActividad(actividad,idCurso)){
+                     dispose();
+                     new MensajeGuardado();
+                 }
+                 else{
+                    
+                     
+                 }
+             }
+             else
+                 System.out.println("no validado");
+         } catch (SQLException ex) {
+             
+            }
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
+    private void jComboBoxInicioHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioHoraActionPerformed
+        // TODO add your handling code here:
+        if(jComboBoxInicioHora.getSelectedIndex()==13){
+            jComboBoxHoraFin.addItem(20);
+            jComboBoxMinutosFin.removeItemAt(0);
+            jComboBoxInicioMinutos.updateUI();
+            jComboBoxHoraFin.updateUI();        
+    }else{
+        recorrerHoraComboBo( jComboBoxInicioHora.getSelectedIndex());
+        }
+        
+    }//GEN-LAST:event_jComboBoxInicioHoraActionPerformed
+    private void recorrerHoraComboBo(int index){
+        jComboBoxHoraFin.removeAllItems();
+        for(int i=index+1; i<=13;i++){
+            jComboBoxHoraFin.addItem(i+7);
+            }
+        jComboBoxHoraFin.updateUI();
+    }
+    
+    private void mostrarCursos() throws SQLException{
+        List<Curso> listaCursos = new ArrayList();
+        listaCursos=actividadDao.mostrarCursos(actividadDao.consultar("curso"));
+        for(int i=0; i<listaCursos.size();i++){
+           jComboBoxCurso.addItem(listaCursos.get(i).getNombreCurso());
+        }
+        jComboBoxCurso.updateUI();
+        
+    }
+    private String obtenerIdCurso() throws SQLException{
+        String idCurso="";
+        idCurso=actividadDao.obtenerIdCurso(jComboBoxCurso.getSelectedItem().toString());
+        return idCurso;
+    }
+    private String obtenerIdActividad() throws SQLException{
+        return actividadDao.obtenerIdActividad();
+    }
     /**
      * @param args the command line arguments
      */

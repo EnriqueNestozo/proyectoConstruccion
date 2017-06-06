@@ -30,8 +30,9 @@ public class ConexionBD {
     
     public void conectar() throws SQLException{
         try {
-            conexion = DriverManager.getConnection(BD_URL,USUARIO,CONTRASENIA);//"?user=root1&password=123");
+            //"?user=root1&password=123");
             Class.forName(JDBC_DRIVER);
+            conexion = DriverManager.getConnection(BD_URL,USUARIO,CONTRASENIA);
             estadoDeConexion = true;
         } catch (Exception ex) {
             System.out.println("Imposible conectar a la base de datos " + ex.getMessage());

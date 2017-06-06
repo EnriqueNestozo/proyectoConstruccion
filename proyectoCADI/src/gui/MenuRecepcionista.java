@@ -16,6 +16,7 @@ public class MenuRecepcionista extends javax.swing.JFrame {
      */
     public MenuRecepcionista() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -139,8 +140,8 @@ public class MenuRecepcionista extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnRealizarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarReservacionActionPerformed
-        RealizarReservacion agregar = new RealizarReservacion();
-        
+        IngresarMatriculaReservacion ingresarMatricula = new IngresarMatriculaReservacion();
+        ingresarMatricula.setVisible(true);
     }//GEN-LAST:event_btnRealizarReservacionActionPerformed
 
     /**
@@ -175,6 +176,7 @@ public class MenuRecepcionista extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MenuRecepcionista().setVisible(true);
+                
             }
         });
     }

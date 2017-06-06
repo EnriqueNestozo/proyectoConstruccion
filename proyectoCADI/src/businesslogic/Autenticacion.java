@@ -24,10 +24,10 @@ public class Autenticacion extends ConexionBD {
         boolean autorizacion = false;
         try{  
             this.conectar();
-            PreparedStatement estado = this.conexion.prepareStatement("select * from usuario where nombreUsuario = ? and contrasena = md5(?)");
-            estado.setString(1, usuario.getNombreUsuario());
-            estado.setString(2, usuario.getContrasenia());
-            ResultSet resultado = estado.executeQuery();
+            PreparedStatement sentencia = this.conexion.prepareStatement("select * from usuario where nombreUsuario = ? and contrasena = md5(?)");
+            sentencia.setString(1, usuario.getNombreUsuario());
+            sentencia.setString(2, usuario.getContrasenia());
+            ResultSet resultado = sentencia.executeQuery();
             if(resultado.next()){
                 autorizacion = true;
                 usuario.setTipo(resultado.getString("tipo"));

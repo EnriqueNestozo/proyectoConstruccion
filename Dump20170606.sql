@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `cadi` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `cadi`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: cadi
@@ -39,10 +37,10 @@ CREATE TABLE `actividad` (
   KEY `idAsesor` (`idAsesor`),
   KEY `numeroArea` (`numeroArea`),
   KEY `idCurso` (`idCurso`),
-  CONSTRAINT `actividad_ibfk_3` FOREIGN KEY (`idCurso`) REFERENCES `curso` (`idCurso`),
   CONSTRAINT `actividad_ibfk_1` FOREIGN KEY (`idAsesor`) REFERENCES `asesor` (`idAsesor`),
-  CONSTRAINT `actividad_ibfk_2` FOREIGN KEY (`numeroArea`) REFERENCES `area` (`numeroArea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `actividad_ibfk_2` FOREIGN KEY (`numeroArea`) REFERENCES `area` (`numeroArea`),
+  CONSTRAINT `actividad_ibfk_3` FOREIGN KEY (`idCurso`) REFERENCES `curso` (`idCurso`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,6 +49,7 @@ CREATE TABLE `actividad` (
 
 LOCK TABLES `actividad` WRITE;
 /*!40000 ALTER TABLE `actividad` DISABLE KEYS */;
+INSERT INTO `actividad` VALUES (2,'lectura grupal','El alumno participara en una lectura grupal para mejorar su audicion y habilidad oral','10','2017-06-09 13:00:00','800','13:00:00','15:00:00','2','1000'),(3,'Conociendo la cultura de Francia I','El alumno conocera la cultura de la zona sur de Francia','20','2017-06-08 11:00:00','800','11:00:00','13:00:00','1','1001'),(4,'Tradiciones de Estados Unidos','El alumno conocera tradiciones llevadas a cabo en EUA','15','2017-06-08 11:00:00','801','11:00:00','13:00:00','1','1000');
 /*!40000 ALTER TABLE `actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,6 +104,7 @@ CREATE TABLE `area` (
 
 LOCK TABLES `area` WRITE;
 /*!40000 ALTER TABLE `area` DISABLE KEYS */;
+INSERT INTO `area` VALUES ('1','20'),('2','15'),('3','25');
 /*!40000 ALTER TABLE `area` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,6 +135,7 @@ CREATE TABLE `asesor` (
 
 LOCK TABLES `asesor` WRITE;
 /*!40000 ALTER TABLE `asesor` DISABLE KEYS */;
+INSERT INTO `asesor` VALUES ('800','Fernando','Guzman','Aja','2283138361','fe_asesor@gmail.com','500'),('801','Carlos','Olivo','Villalobos','2282125432','c_olivo@gmail.com','501');
 /*!40000 ALTER TABLE `asesor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,6 +159,7 @@ CREATE TABLE `curso` (
 
 LOCK TABLES `curso` WRITE;
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
+INSERT INTO `curso` VALUES ('1000','InglesIV'),('1001','FrancesI');
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,8 +180,8 @@ CREATE TABLE `inscripcion` (
   PRIMARY KEY (`idInscripcio`),
   KEY `matricula` (`matricula`),
   KEY `nrc` (`nrc`),
-  CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`nrc`) REFERENCES `seccion` (`nrc`),
-  CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`matricula`) REFERENCES `alumno` (`matricula`)
+  CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`matricula`) REFERENCES `alumno` (`matricula`),
+  CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`nrc`) REFERENCES `seccion` (`nrc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -189,6 +191,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
+INSERT INTO `inscripcion` VALUES ('300000','2017-01-10 16:00:00','1',NULL,'zS15011617','34100');
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,8 +237,8 @@ CREATE TABLE `seccion` (
   PRIMARY KEY (`nrc`),
   KEY `idAsesor` (`idAsesor`),
   KEY `idCurso` (`idCurso`),
-  CONSTRAINT `seccion_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `curso` (`idCurso`),
-  CONSTRAINT `seccion_ibfk_1` FOREIGN KEY (`idAsesor`) REFERENCES `asesor` (`idAsesor`)
+  CONSTRAINT `seccion_ibfk_1` FOREIGN KEY (`idAsesor`) REFERENCES `asesor` (`idAsesor`),
+  CONSTRAINT `seccion_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `curso` (`idCurso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -245,6 +248,7 @@ CREATE TABLE `seccion` (
 
 LOCK TABLES `seccion` WRITE;
 /*!40000 ALTER TABLE `seccion` DISABLE KEYS */;
+INSERT INTO `seccion` VALUES ('34100','InglesIV02','feb','jul','800','1000');
 /*!40000 ALTER TABLE `seccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,7 +274,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('100','s15011617','f4d19f6dfce51edfdd070179df21c1d0','1'),('500','asesor_fer','b69a52925c4bb190fcb1b7eb2c438631','2'),('502','recep_flo','e2233f2ac89a9865936519c974b591fd','3'),('503','coord_jcarlos','f22a88f0aa45ffe1df5ac599c8c863f8','4');
+INSERT INTO `usuario` VALUES ('100','s15011617','f4d19f6dfce51edfdd070179df21c1d0','1'),('500','asesor_fer','b69a52925c4bb190fcb1b7eb2c438631','2'),('501','asesor_carlos','9f89f4e3ec1a37dfb54ab0d2a5518117','2'),('502','recep_flo','e2233f2ac89a9865936519c974b591fd','3'),('503','coord_jcarlos','f22a88f0aa45ffe1df5ac599c8c863f8','4');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -283,4 +287,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-02 23:07:57
+-- Dump completed on 2017-06-06  1:10:13

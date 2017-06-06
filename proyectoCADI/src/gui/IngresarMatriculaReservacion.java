@@ -5,6 +5,8 @@
  */
 package gui;
 
+
+import businesslogic.Alumno;
 import businesslogic.DAOClasses.IngresarMatriculaReservacionDAO;
 
 /**
@@ -96,9 +98,14 @@ public class IngresarMatriculaReservacion extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         IngresarMatriculaReservacionDAO ingresarMatricula = new IngresarMatriculaReservacionDAO();
-        if(ingresarMatricula.verificarMatricula()){
-            RealizarReservacion realizarReservacion = new RealizarReservacion();
+        Alumno usuarioAlumno = new Alumno();
+        usuarioAlumno.setMatricula(txtMatricula.getText());
+        if(ingresarMatricula.verificarMatricula(usuarioAlumno)){
+            RealizarReservacion realizarReservacion = new RealizarReservacion(usuarioAlumno);
+            realizarReservacion.setVisible(true);
             dispose();
+        }else{
+            System.out.println("no");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 

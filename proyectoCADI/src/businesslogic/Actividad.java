@@ -26,6 +26,10 @@ public class Actividad {
         this.area = area;
     }
     
+    public Actividad(){
+        
+    }
+    
     public String getIdActividad() {
         return idActividad;
     }

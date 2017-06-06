@@ -36,12 +36,24 @@ public class ActividadDAO extends ConexionBD{
         List<Actividad> listaDeReservacion = new ArrayList();
         try{
             this.conectar();
-            PreparedStatement sentencia = this.conexion.prepareStatement("select DISTINCT actividad.idActividad, actividad.nombre"
-                    + "from actividad, seccion, curso, inscripcion, asesor, alumno WHERE inscripcion.matricula = ?"
+            PreparedStatement sentencia = this.conexion.prepareStatement("select DISTINCT actividad.idActividad, actividad.nombre, "
+                    + "actividad.descripcion, actividad.cupo, actividad.fechaActividad, actividad.horaInicio, actividad.horaFin, actividad.numeroArea"
+                    + " from actividad, seccion, curso, inscripcion, asesor, alumno WHERE inscripcion.matricula = ?"
                     + " AND actividad.idCurso = seccion.idCurso AND inscripcion.nrc = seccion.nrc ORDER BY idActividad");
             sentencia.setString(1, usuarioAlumno.getMatricula());
             ResultSet resultado = sentencia.executeQuery();
             while(resultado.next()){
+                Actividad actividad = new Actividad();
+                actividad.setIdActividad(resultado.getString("idActividad"));
+                actividad.setNombreActividad(resultado.getString("nombre"));
+                actividad.setDescripcion(resultado.getString("descripcion"));
+                actividad.setCupo(resultado.getString("cupo"));
+                actividad.setArea(resultado.getString("numeroArea"));
+                actividad.setFechaActividad(resultado.getString("fechaActividad"));
+                actividad.setHoraInicio(resultado.getString("horaInicio"));
+                actividad.setHoraFin(resultado.getString("horaFin"));
+                
+                System.out.println(resultado.getString("idActividad"));
                 //falta hacer una instancia de actividad y meterla a la listadereservacion
             }
         }catch(SQLException e){

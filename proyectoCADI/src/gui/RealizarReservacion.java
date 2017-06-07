@@ -11,6 +11,7 @@ import businesslogic.DAOClasses.ActividadDAO;
 import businesslogic.DAOClasses.ReservacionDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class RealizarReservacion extends javax.swing.JFrame {
     List<Actividad> listaDeActividades= new ArrayList();
-    
+    Alumno alumno = new Alumno();
     public RealizarReservacion() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -28,17 +29,18 @@ public class RealizarReservacion extends javax.swing.JFrame {
     public RealizarReservacion(Alumno usuarioAlumno){
         initComponents();
         this.setLocationRelativeTo(null);
-        jlMatricula.setText(usuarioAlumno.getMatricula());
-        jlNombre.setText(usuarioAlumno.getNombre());
-        jlApellidoPaterno.setText(usuarioAlumno.getApellidoPaterno());
-        jlApellidoMaterno.setText(usuarioAlumno.getApellidoMaterno());
+        alumno = usuarioAlumno;
+        jlMatricula.setText(alumno.getMatricula());
+        jlNombre.setText(alumno.getNombre());
+        jlApellidoPaterno.setText(alumno.getApellidoPaterno());
+        jlApellidoMaterno.setText(alumno.getApellidoMaterno());
         
-        mostrarActividades(usuarioAlumno);
+        mostrarActividades(alumno);
     }
     
-    private void mostrarActividades(Alumno usuarioAlumno){
+    private void mostrarActividades(Alumno alumno){
         ActividadDAO actividades = new ActividadDAO();
-        listaDeActividades = actividades.mostrarActividades(usuarioAlumno);
+        listaDeActividades = actividades.mostrarActividades(alumno);
         for(int i=0; i<listaDeActividades.size();i++){
             jComboBoxActividades.addItem(listaDeActividades.get(i).getNombreActividad());
         }
@@ -53,6 +55,7 @@ public class RealizarReservacion extends javax.swing.JFrame {
         jLabelHoraInicio.setText(listaDeActividades.get(opcionSeleccionada).getHoraInicio());
         jLabelHoraFin.setText(listaDeActividades.get(opcionSeleccionada).getHoraFin());
         jLabelArea.setText(listaDeActividades.get(opcionSeleccionada).getArea());
+        jTextAreaDescripcion.setText(listaDeActividades.get(opcionSeleccionada).getDescripcion());
     }
     
 
@@ -125,6 +128,7 @@ public class RealizarReservacion extends javax.swing.JFrame {
 
         jLabel9.setText("Descripcion:");
 
+        jTextAreaDescripcion.setEditable(false);
         jTextAreaDescripcion.setColumns(20);
         jTextAreaDescripcion.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDescripcion);
@@ -273,7 +277,7 @@ public class RealizarReservacion extends javax.swing.JFrame {
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelHoraInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -302,9 +306,14 @@ public class RealizarReservacion extends javax.swing.JFrame {
 
     private void jButtonReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarActionPerformed
         ReservacionDAO reservacion = new ReservacionDAO();
-        if(reservacion.buscarReservacion()){
-            
+        if(reservacion.buscarReservacion(alumno,listaDeActividades.get(jComboBoxActividades.getSelectedIndex()))){
+            JOptionPane.showMessageDialog(null, "El alumno ya cuenta con la reservacion a la actividad");
+        }else{
+            if(reservacion.crear(alumno, listaDeActividades.get(jComboBoxActividades.getSelectedIndex()))){
+                JOptionPane.showMessageDialog(null, "Actividad Reservada");
+            }
         }
+        dispose();
     }//GEN-LAST:event_jButtonReservarActionPerformed
 
     /**

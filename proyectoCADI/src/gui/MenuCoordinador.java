@@ -180,7 +180,6 @@ public class MenuCoordinador extends javax.swing.JFrame {
 
     private void BotonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCerrarSesionActionPerformed
         // TODO add your handling code here:
-        MenuCoordinador.EXIT_ON_CLOSE(0);
     }//GEN-LAST:event_BotonCerrarSesionActionPerformed
 
     private void BotonAvisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAvisosActionPerformed

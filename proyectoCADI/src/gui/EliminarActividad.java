@@ -5,6 +5,15 @@
  */
 package gui;
 
+import businesslogic.Actividad;
+import businesslogic.Curso;
+import businesslogic.DAOClasses.ActividadDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author fernandomanuel
@@ -15,8 +24,13 @@ public class EliminarActividad extends javax.swing.JFrame {
      * Creates new form EliminarActividad
      */
     public EliminarActividad() {
-        initComponents();
-        setVisible(true);
+        try {
+            initComponents();
+            mostrarCursos();            
+            setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(EliminarActividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -33,12 +47,13 @@ public class EliminarActividad extends javax.swing.JFrame {
         jLabelCurso = new javax.swing.JLabel();
         jButtonEliminar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxActividad = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
-        jComboBoxCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Inglés I","Inglés II","Inglés III","Francés I","Francés II","Francés III","Alemán I","Alemán II","Alemán III" }));
         jComboBoxCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCursoActionPerformed(evt);
@@ -63,22 +78,40 @@ public class EliminarActividad extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Actividades:");
+
+        jComboBoxActividad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { }));
+        jComboBoxActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxActividadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBoxCurso, 0, 95, Short.MAX_VALUE)
-                .addGap(230, 230, 230))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(jButtonEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCancelar)
-                .addGap(86, 86, 86))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxActividad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jButtonEliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                                .addComponent(jButtonCancelar)
+                                .addGap(86, 86, 86))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBoxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(206, 206, 206))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +120,11 @@ public class EliminarActividad extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCurso))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBoxActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEliminar)
                     .addComponent(jButtonCancelar))
@@ -109,7 +146,11 @@ public class EliminarActividad extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCursoActionPerformed
-        // TODO add your handling code here:
+        try {
+            mostrarActividades(jComboBoxCurso.getSelectedItem().toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(EliminarActividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jComboBoxCursoActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
@@ -123,9 +164,52 @@ public class EliminarActividad extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    private void jComboBoxActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActividadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxActividadActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    private void mostrarActividades(String curso) throws SQLException{
+        jComboBoxActividad.removeAllItems();
+        ActividadDAO actividadDao = new ActividadDAO();
+        List<Actividad> listaActividades = new ArrayList();
+        listaActividades=actividadDao.mostrarActividadIdioma(actividadDao.obtenerIdCurso(curso));
+        for(int i=0; i<listaActividades.size();i++){
+            jComboBoxActividad.addItem(listaActividades.get(i).getNombreActividad());
+        }
+        jComboBoxActividad.updateUI();
+    }
+    private void mostrarCursos() throws SQLException{
+        ActividadDAO actividadDao = new ActividadDAO();
+        List<Curso> listaCursos = new ArrayList();
+        listaCursos=actividadDao.mostrarCursos();
+        for(int i=0; i<listaCursos.size();i++){
+           jComboBoxCurso.addItem(listaCursos.get(i).getNombreCurso());
+        }
+        jComboBoxCurso.updateUI();
+        
+    }
+    public void confirmacionBorrar(boolean borrar) throws SQLException{
+        if(borrar){
+            ActividadDAO actividadDao =new ActividadDAO();
+            try {
+                if(actividadDao.borrarActividad(actividadDao.obtenerIdActividad(jComboBoxActividad.getSelectedItem().toString()))){
+                    new MensajeBorrado();
+                }
+                else{
+                    new MensajeErrorGuardado();
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(EliminarActividad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -161,7 +245,9 @@ public class EliminarActividad extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JComboBox jComboBoxActividad;
     private javax.swing.JComboBox jComboBoxCurso;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCurso;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

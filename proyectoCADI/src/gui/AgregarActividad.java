@@ -30,7 +30,7 @@ public class AgregarActividad extends javax.swing.JFrame {
      */
     public AgregarActividad() {
         try{
-            this.idActividad = actividadDao.obtenerIdActividad();
+            this.idActividad = actividadDao.obtenerMaxIdActividad();
             initComponents();
             mostrarCursos();
             obtenerArea();
@@ -159,6 +159,11 @@ public class AgregarActividad extends javax.swing.JFrame {
         jLabelDosPuntos.setText(":");
 
         jComboBoxInicioMinutos.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59",}));
+        jComboBoxInicioMinutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxInicioMinutosActionPerformed(evt);
+            }
+        });
 
         jLabelHoraFin.setText("Hora Fin:");
 
@@ -370,7 +375,7 @@ public class AgregarActividad extends javax.swing.JFrame {
                  jComboBoxCupo.getSelectedItem().toString(),
                  jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),
                  jComboBoxHoraFin.getSelectedItem().toString()+":"+jComboBoxMinutosFin.getSelectedItem().toString(),
-                 jTextFieldAño.getText()+"-"+jComboBoxMes.getSelectedItem().toString()+"-"+jComboBoxDia.getSelectedItem().toString(),
+                 jTextFieldAño.getText()+"-"+jComboBoxMes.getSelectedItem().toString()+"-"+jComboBoxDia.getSelectedItem().toString()+" "+jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),
                  jComboBoxArea.getSelectedItem().toString());
             if(!actividadDao.validar(actividad)){
                  if(actividadDao.guardaActividad(actividad,idCurso)){
@@ -378,7 +383,7 @@ public class AgregarActividad extends javax.swing.JFrame {
                      new MensajeGuardado();
                  }
                  else{
-                     new MensajeError();
+                     new MensajeErrorGuardado();
                  }                 
              }
              else
@@ -392,25 +397,8 @@ public class AgregarActividad extends javax.swing.JFrame {
 
     private void jComboBoxInicioHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioHoraActionPerformed
         // TODO add your handling code here:
-        if(jComboBoxInicioHora.getSelectedIndex()==13){
-            jComboBoxHoraFin.removeAllItems();
-            jComboBoxHoraFin.addItem(20);
-            if("00".equals(jComboBoxMinutosFin.getItemAt(0).toString())){
-                            jComboBoxMinutosFin.removeItemAt(0);
-            }
-            jComboBoxInicioMinutos.updateUI();
-            jComboBoxHoraFin.updateUI();        
-    }else{
-        recorrerHoraComboBo( jComboBoxInicioHora.getSelectedIndex());
-        if( "01".equals(jComboBoxMinutosFin.getItemAt(0).toString())) {
-            jComboBoxMinutosFin.addItem(00);
-                    
-        } else {
-        }
-        }
-        
+        recorrerHoraComboBo(jComboBoxInicioHora.getSelectedIndex()); 
     }//GEN-LAST:event_jComboBoxInicioHoraActionPerformed
-
     private void jTextFieldNombreActividadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreActividadKeyTyped
         // TODO add your handling code here:
         numeroCaracteres(evt,jTextFieldNombreActividad,50);
@@ -419,11 +407,24 @@ public class AgregarActividad extends javax.swing.JFrame {
     private void jTextAreaDetallesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaDetallesKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextAreaDetallesKeyTyped
+
+    private void jComboBoxInicioMinutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioMinutosActionPerformed
+        // TODO add your handling code here:
+        mismaHora(Integer.parseInt(jComboBoxInicioMinutos.getSelectedItem().toString()));
+    }//GEN-LAST:event_jComboBoxInicioMinutosActionPerformed
     private void recorrerHoraComboBo(int index){
-        jComboBoxHoraFin.removeAllItems();
+        if(index==13){
+            jComboBoxHoraFin.removeAllItems();
+            jComboBoxHoraFin.addItem(20);
+            mismaHora(Integer.parseInt(jComboBoxInicioMinutos.getSelectedItem().toString()));
+        }
+        else{
+            jComboBoxHoraFin.removeAllItems();
         for(int i=index+1; i<=13;i++){
             jComboBoxHoraFin.addItem(i+7);
             }
+        mismaHora(-1);
+        }
         jComboBoxHoraFin.updateUI();
     }
     public static void numeroCaracteres(java.awt.event.KeyEvent evt, JTextField campoDeseado, int numeroLimitar){
@@ -443,7 +444,6 @@ public class AgregarActividad extends javax.swing.JFrame {
     private void obtenerArea() throws SQLException{
         List<Area> listaAreas = new ArrayList();
         listaAreas=actividadDao.mostrarAreas();
-        System.out.println(listaAreas.size());
         for(int i=0; i<listaAreas.size(); i++){
             jComboBoxArea.addItem(listaAreas.get(i).getNumeroArea());
 
@@ -451,6 +451,14 @@ public class AgregarActividad extends javax.swing.JFrame {
         jComboBoxArea.updateUI();
         
     }
+    private void mismaHora(int minuto){
+        jComboBoxMinutosFin.removeAllItems();
+        for(int i=minuto+1; i<60; i++){
+            jComboBoxMinutosFin.addItem(i);
+        }
+        jComboBoxMinutosFin.updateUI();
+    }
+
     /**
      * @param args the command line arguments
      */

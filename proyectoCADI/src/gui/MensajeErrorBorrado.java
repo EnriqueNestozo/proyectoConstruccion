@@ -16,6 +16,7 @@ public class MensajeErrorBorrado extends javax.swing.JFrame {
      */
     public MensajeErrorBorrado() {
         initComponents();
+        setVisible(true);
     }
 
     /**

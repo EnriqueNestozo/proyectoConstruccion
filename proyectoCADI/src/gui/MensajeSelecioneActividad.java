@@ -5,20 +5,16 @@
  */
 package gui;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author fernandomanuel
  */
-public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
+public class MensajeSelecioneActividad extends javax.swing.JFrame {
 
     /**
-     * Creates new form MensajeConfirmacionBorrado
+     * Creates new form MensajeSelecioneActividad
      */
-    public MensajeConfirmacionBorrado() {
+    public MensajeSelecioneActividad() {
         initComponents();
         setVisible(true);
     }
@@ -35,9 +31,8 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
         MensajeBorrado = new javax.swing.JPanel();
         jBotonAceptar = new javax.swing.JButton();
         jLabelMensaje = new javax.swing.JLabel();
-        jBotonCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         MensajeBorrado.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -50,42 +45,27 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
             }
         });
 
-        jLabelMensaje.setText("¿Está seguro de que desea borrar la actividad?");
-
-        jBotonCancelar.setBackground(new java.awt.Color(0, 153, 0));
-        jBotonCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        jBotonCancelar.setText("Cancelar");
-        jBotonCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonCancelarActionPerformed(evt);
-            }
-        });
+        jLabelMensaje.setText("Por favor Seleccione una actividad");
 
         javax.swing.GroupLayout MensajeBorradoLayout = new javax.swing.GroupLayout(MensajeBorrado);
         MensajeBorrado.setLayout(MensajeBorradoLayout);
         MensajeBorradoLayout.setHorizontalGroup(
             MensajeBorradoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MensajeBorradoLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabelMensaje)
-                .addContainerGap(66, Short.MAX_VALUE))
-            .addGroup(MensajeBorradoLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jBotonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(62, 62, 62)
+                .addGroup(MensajeBorradoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBotonAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         MensajeBorradoLayout.setVerticalGroup(
             MensajeBorradoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MensajeBorradoLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
                 .addComponent(jLabelMensaje)
                 .addGap(18, 18, 18)
-                .addGroup(MensajeBorradoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBotonAceptar)
-                    .addComponent(jBotonCancelar))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(jBotonAceptar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -104,26 +84,8 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
 
     private void jBotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAceptarActionPerformed
         // TODO add your handling code here:
-        
-        EliminarActividad eliminar = new EliminarActividad();
-        try {
-            eliminar.confirmacionBorrar(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(Level.SEVERE, null, ex);
-        }
         dispose();
     }//GEN-LAST:event_jBotonAceptarActionPerformed
-
-    private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
-        // TODO add your handling code here:
-        EliminarActividad eliminar = new EliminarActividad();
-        try {
-            eliminar.confirmacionBorrar(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dispose();
-    }//GEN-LAST:event_jBotonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,20 +104,20 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MensajeSelecioneActividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MensajeSelecioneActividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MensajeSelecioneActividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MensajeSelecioneActividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MensajeConfirmacionBorrado().setVisible(true);
+                new MensajeSelecioneActividad().setVisible(true);
             }
         });
     }
@@ -163,7 +125,6 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MensajeBorrado;
     private javax.swing.JButton jBotonAceptar;
-    private javax.swing.JButton jBotonCancelar;
     private javax.swing.JLabel jLabelMensaje;
     // End of variables declaration//GEN-END:variables
 }

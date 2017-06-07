@@ -11,7 +11,6 @@ import businesslogic.DAOClasses.ActividadDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +33,7 @@ public class AgregarActividad extends javax.swing.JFrame {
             initComponents();
             mostrarCursos();
             obtenerArea();
+            recorrerHoraComboBo(0);
         }catch (SQLException ex) {
             Logger.getLogger(AgregarActividad.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -387,7 +387,7 @@ public class AgregarActividad extends javax.swing.JFrame {
                  }                 
              }
              else
-                 System.out.println("no validado");
+                 new MensajeValidacion();
         } catch (SQLException ex) {
             Logger.getLogger(AgregarActividad.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
@@ -406,6 +406,7 @@ public class AgregarActividad extends javax.swing.JFrame {
 
     private void jTextAreaDetallesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaDetallesKeyTyped
         // TODO add your handling code here:
+        numeroCaracteresTextArea(evt, jTextAreaDetalles, 250);
     }//GEN-LAST:event_jTextAreaDetallesKeyTyped
 
     private void jComboBoxInicioMinutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioMinutosActionPerformed
@@ -457,6 +458,10 @@ public class AgregarActividad extends javax.swing.JFrame {
             jComboBoxMinutosFin.addItem(i);
         }
         jComboBoxMinutosFin.updateUI();
+    }
+    private void numeroCaracteresTextArea(KeyEvent evt, JTextArea areaDeseada , int numeroLimitar) {
+        if(areaDeseada.getText().length() >= numeroLimitar )
+            evt.consume();
     }
 
     /**
@@ -528,7 +533,4 @@ public class AgregarActividad extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNombreActividad;
     // End of variables declaration//GEN-END:variables
 
-    private void numeroCaracteres(KeyEvent evt, JTextArea jTextAreaDetalles, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

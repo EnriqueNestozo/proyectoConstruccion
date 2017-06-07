@@ -22,10 +22,6 @@ public class ProyectoCADI {
         // TODO code application logic here
         Login login = new Login();
         login.setVisible(true);
-        MenuCoordinador menu = new MenuCoordinador();
-        menu.setVisible(true);
-        MenuAlumno menu2 = new MenuAlumno();
-        menu2.setVisible(true);
     }
     
 }

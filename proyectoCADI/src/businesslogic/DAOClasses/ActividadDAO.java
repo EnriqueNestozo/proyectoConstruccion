@@ -9,7 +9,6 @@ import businesslogic.Actividad;
 import businesslogic.Alumno;
 import businesslogic.Area;
 import businesslogic.Curso;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import dataaccess.ConexionBD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,14 +21,13 @@ import java.util.List;
  * @author Enrique
  */
 public class ActividadDAO extends ConexionBD{
-    private PreparedStatement sentencia;
     public ActividadDAO() {
     }
     
 public boolean guardaActividad(Actividad actividad,String idCurso) throws SQLException{
     boolean guardada=false;
     this.conectar();
-    sentencia=this.conexion.prepareStatement("INSERT INTO actividad VALUES (?,?,?,?,?,?,?,?,?,?)");
+    PreparedStatement sentencia=this.conexion.prepareStatement("INSERT INTO actividad VALUES (?,?,?,?,?,?,?,?,?,?)");
     sentencia.setString(1,null);
     sentencia.setString(2,actividad.getNombreActividad());
     sentencia.setString(3,actividad.getDescripcion());
@@ -38,6 +36,7 @@ public boolean guardaActividad(Actividad actividad,String idCurso) throws SQLExc
     sentencia.setString(6,null);
     sentencia.setString(7,actividad.getHoraInicio());
     sentencia.setString(8,actividad.getHoraFin());
+    sentencia.setString(9, actividad.getArea());
     sentencia.setString(10,idCurso);
     if(sentencia.executeUpdate()==1){
 
@@ -67,13 +66,41 @@ public boolean validar(Actividad actividad){
         estaVacia=true;      
     return estaVacia;    
 }
+public String obtenerIdActividad(String actividad) throws SQLException{
+    ResultSet resultado = null;
+    try{
+        this.conectar();
+        PreparedStatement sentencia=this.conexion.prepareStatement("select idACtividad from actividad where nombre = ?");
+        sentencia.setString(1, actividad);
+        resultado=sentencia.executeQuery();
+        resultado.next();
+     this.cerrarConexion();
+    }catch(SQLException e){
+        System.out.println(e);
+    }
+    return resultado.getString("id");
+}
+public boolean borrarActividad(String idActividad){
+    boolean borrado=false;
+    try{
+        this.conectar();
+        PreparedStatement sentencia=this.conexion.prepareStatement("delete from actividad where idACtividad = ?");
+        sentencia.setString(1, idActividad);
+        if(sentencia.execute())
+            borrado=true;
+        this.cerrarConexion();
+}catch(SQLException e){
+        System.out.println(e);
+    }
+    return borrado;
+}
 
-public String obtenerIdActividad() throws SQLException{
+public String obtenerMaxIdActividad() throws SQLException{
     int idActividad=0;
     ResultSet resultado = null;
     try{
         this.conectar();
-        sentencia=this.conexion.prepareStatement("select max(idActividad) as id from actividad");
+        PreparedStatement sentencia=this.conexion.prepareStatement("select max(idActividad) as id from actividad");
         resultado=sentencia.executeQuery();
         resultado.next();
         idActividad =Integer.parseInt(resultado.getString("id"))+1 ;
@@ -87,7 +114,7 @@ public String obtenerIdCurso(String nombreCurso) throws SQLException{
     ResultSet resultado=null;
     try{
         this.conectar();
-        sentencia=this.conexion.prepareStatement("select idCurso from curso where nombre = ?");
+        PreparedStatement sentencia=this.conexion.prepareStatement("select idCurso from curso where nombre = ?");
         sentencia.setString(1, nombreCurso);
         resultado = sentencia.executeQuery();
         resultado.next();
@@ -101,7 +128,7 @@ public List<Curso>mostrarCursos() throws SQLException{
     List<Curso> listaCursos = new ArrayList();
     try{
         this.conectar(); 
-        sentencia=this.conexion.prepareStatement("select * from curso");
+        PreparedStatement sentencia=this.conexion.prepareStatement("select * from curso");
         ResultSet resultado =sentencia.executeQuery();
         while(resultado.next()){
             Curso curso = new Curso();
@@ -118,7 +145,7 @@ public List<Area>mostrarAreas() throws SQLException{
     List<Area> listaAreas = new ArrayList();
     try{
         this.conectar(); 
-        sentencia=this.conexion.prepareStatement("select * from area");
+        PreparedStatement sentencia=this.conexion.prepareStatement("select * from area");
         ResultSet resultado =sentencia.executeQuery();
         while(resultado.next()){
             Area area = new Area();
@@ -130,10 +157,26 @@ public List<Area>mostrarAreas() throws SQLException{
                 System.out.println(e);
                 }
         return listaAreas;
-    } 
-            
- 
-public List<Actividad> mostrarActividades(Alumno usuarioAlumno){
+    }            
+public List<Actividad> mostrarActividadIdioma(String idioma) throws SQLException{
+    List<Actividad> listaActividadIdioma = new ArrayList();
+    try{
+        this.conectar();
+        PreparedStatement sentencia = this.conexion.prepareStatement("select * from actividad where idCurso = ?");
+        sentencia.setString(1, idioma);
+        ResultSet resultado =sentencia.executeQuery();
+        while(resultado.next()){
+            Actividad actividad = new Actividad();
+            actividad.setNombreActividad(resultado.getString("nombre"));
+            listaActividadIdioma.add(actividad);
+        }
+    }catch(SQLException e){
+        System.out.println(e.getMessage());
+    }
+    this.cerrarConexion();
+return listaActividadIdioma;
+}
+public List<Actividad> mostrarActividades(Alumno usuarioAlumno) throws SQLException{
 List<Actividad> listaDeReservacion = new ArrayList();
 try{
     this.conectar();

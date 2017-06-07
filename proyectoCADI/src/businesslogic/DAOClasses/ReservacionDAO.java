@@ -21,11 +21,23 @@ public class ReservacionDAO extends ConexionBD {
         }
         
     }
+    
     public void eliminar(Reservacion reservacion){
         
     }
+    
     public List<Reservacion> mostrar(){
         List<Reservacion> listaDeReservacion = new ArrayList();
         return listaDeReservacion;
+    }
+    
+    public boolean buscarReservacion(){
+        boolean yaReservada = false;
+        try {
+            this.conectar();
+            PreparedStatement estado = this.conexion.prepareStatement("select * from reservacion where idActividad = ?");
+        } catch (Exception e) {
+        }
+        return yaReservada;
     }
 }

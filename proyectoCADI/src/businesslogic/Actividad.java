@@ -14,6 +14,7 @@ public class Actividad {
     private String horaFin = "";
     private String fechaActividad = "";
     private String area = "";
+    private String idCurso = "";
 
     public Actividad(String idActividad,String nombreActividad,String descripcion,String cupo,String horaInicio,String horaFin,String fechaActividad,String area) {
         this.idActividad = idActividad;
@@ -24,6 +25,15 @@ public class Actividad {
         this.horaFin = horaFin;
         this.fechaActividad = fechaActividad;
         this.area = area;
+        this.idCurso = idCurso;
+    }
+
+    public String getIdCurso() {
+        return idCurso;
+    }
+
+    public void setIdCurso(String idCurso) {
+        this.idCurso = idCurso;
     }
     
     public Actividad(){
@@ -93,4 +103,6 @@ public class Actividad {
     public void setArea(String area) {
         this.area = area;
     }
+
+   
 }

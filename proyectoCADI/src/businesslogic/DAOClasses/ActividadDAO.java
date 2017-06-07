@@ -176,11 +176,16 @@ public List<Actividad> mostrarActividadIdioma(String idioma) throws SQLException
     this.cerrarConexion();
 return listaActividadIdioma;
 }
+<<<<<<< HEAD
 public List<Actividad> mostrarActividades(Alumno usuarioAlumno) throws SQLException{
+=======
+public List<Actividad> mostrarActividades(Alumno usuarioAlumno){
+>>>>>>> 2b4ac1730ec033a73ae974e3eb00af912a241a3e
 List<Actividad> listaDeReservacion = new ArrayList();
 try{
     this.conectar();
-    PreparedStatement sentencia = this.conexion.prepareStatement("select DISTINCT actividad.idActividad, actividad.nombre"
+    PreparedStatement sentencia = this.conexion.prepareStatement("select DISTINCT actividad.idActividad, actividad.nombre, actividad.descripcion, actividad.cupo,"
+            + " actividad.fechaActividad, actividad.idAsesor, actividad.horaInicio, actividad.horaFin, actividad.numeroArea, actividad.idCurso"
             + " from actividad, seccion, curso, inscripcion, asesor, alumno WHERE inscripcion.matricula = ?"
             + " AND actividad.idCurso = seccion.idCurso AND inscripcion.nrc = seccion.nrc ORDER BY idActividad");
     sentencia.setString(1, usuarioAlumno.getMatricula());
@@ -195,14 +200,14 @@ try{
         actividad.setFechaActividad(resultado.getString("fechaActividad"));
         actividad.setHoraInicio(resultado.getString("horaInicio"));
         actividad.setHoraFin(resultado.getString("horaFin"));
-
-        System.out.println(resultado.getString("idActividad"));
-        //falta hacer una instancia de actividad y meterla a la listadereservacion
+        actividad.setArea(resultado.getString("numeroArea"));
+        actividad.setIdCurso(resultado.getString("idCurso"));
+        listaDeReservacion.add(actividad);
     }
+    this.cerrarConexion();
 }catch(SQLException e){
     System.out.println(e.getMessage());
 }
-this.cerrarConexion();
 return listaDeReservacion;
 } 
 }

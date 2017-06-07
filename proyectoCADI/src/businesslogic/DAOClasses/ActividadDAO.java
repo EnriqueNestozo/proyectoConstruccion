@@ -176,11 +176,7 @@ public List<Actividad> mostrarActividadIdioma(String idioma) throws SQLException
     this.cerrarConexion();
 return listaActividadIdioma;
 }
-<<<<<<< HEAD
 public List<Actividad> mostrarActividades(Alumno usuarioAlumno) throws SQLException{
-=======
-public List<Actividad> mostrarActividades(Alumno usuarioAlumno){
->>>>>>> 2b4ac1730ec033a73ae974e3eb00af912a241a3e
 List<Actividad> listaDeReservacion = new ArrayList();
 try{
     this.conectar();

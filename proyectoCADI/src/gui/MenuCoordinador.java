@@ -5,6 +5,8 @@
  */
 package gui;
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 /**
  *
  * @author Enrique
@@ -180,6 +182,7 @@ public class MenuCoordinador extends javax.swing.JFrame {
 
     private void BotonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCerrarSesionActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_BotonCerrarSesionActionPerformed
 
     private void BotonAvisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAvisosActionPerformed

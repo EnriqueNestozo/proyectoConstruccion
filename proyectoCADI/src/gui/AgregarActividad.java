@@ -401,12 +401,17 @@ public class AgregarActividad extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxInicioHoraActionPerformed
     private void jTextFieldNombreActividadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreActividadKeyTyped
         // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_PASTE){
+            evt.consume();
+        }
         numeroCaracteres(evt,jTextFieldNombreActividad,50);
+        
     }//GEN-LAST:event_jTextFieldNombreActividadKeyTyped
 
     private void jTextAreaDetallesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaDetallesKeyTyped
         // TODO add your handling code here:
         numeroCaracteresTextArea(evt, jTextAreaDetalles, 250);
+        
     }//GEN-LAST:event_jTextAreaDetallesKeyTyped
 
     private void jComboBoxInicioMinutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioMinutosActionPerformed
@@ -460,6 +465,7 @@ public class AgregarActividad extends javax.swing.JFrame {
         jComboBoxMinutosFin.updateUI();
     }
     private void numeroCaracteresTextArea(KeyEvent evt, JTextArea areaDeseada , int numeroLimitar) {
+        
         if(areaDeseada.getText().length() >= numeroLimitar )
             evt.consume();
     }

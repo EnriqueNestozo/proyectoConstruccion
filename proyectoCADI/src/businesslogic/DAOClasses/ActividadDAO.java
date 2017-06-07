@@ -78,7 +78,7 @@ public String obtenerIdActividad(String actividad) throws SQLException{
     }catch(SQLException e){
         System.out.println(e);
     }
-    return resultado.getString("id");
+    return resultado.getString("idActividad");
 }
 public boolean borrarActividad(String idActividad){
     boolean borrado=false;
@@ -86,8 +86,8 @@ public boolean borrarActividad(String idActividad){
         this.conectar();
         PreparedStatement sentencia=this.conexion.prepareStatement("delete from actividad where idACtividad = ?");
         sentencia.setString(1, idActividad);
-        if(sentencia.execute())
-            borrado=true;
+        if(!sentencia.execute()){
+            borrado=true;}
         this.cerrarConexion();
 }catch(SQLException e){
         System.out.println(e);

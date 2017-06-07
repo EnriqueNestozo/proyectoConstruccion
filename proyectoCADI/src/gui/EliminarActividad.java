@@ -155,8 +155,11 @@ public class EliminarActividad extends javax.swing.JFrame {
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
-        new MensajeBorrado();
-        dispose();
+        if(actividadSelecionada()){
+            new MensajeConfirmacionBorrado();
+            dispose();
+        }else{
+            new MensajeSelecioneActividad();}
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -173,6 +176,7 @@ public class EliminarActividad extends javax.swing.JFrame {
      */
     private void mostrarActividades(String curso) throws SQLException{
         jComboBoxActividad.removeAllItems();
+        jComboBoxActividad.addItem("seleccione una actividad");
         ActividadDAO actividadDao = new ActividadDAO();
         List<Actividad> listaActividades = new ArrayList();
         listaActividades=actividadDao.mostrarActividadIdioma(actividadDao.obtenerIdCurso(curso));
@@ -191,15 +195,23 @@ public class EliminarActividad extends javax.swing.JFrame {
         jComboBoxCurso.updateUI();
         
     }
+    private boolean actividadSelecionada(){
+        boolean seleccionada=true;
+        if("seleccione una actividad".equals(jComboBoxActividad.getSelectedItem().toString()))
+            seleccionada=false;
+        return seleccionada;
+    }
     public void confirmacionBorrar(boolean borrar) throws SQLException{
         if(borrar){
             ActividadDAO actividadDao =new ActividadDAO();
             try {
                 if(actividadDao.borrarActividad(actividadDao.obtenerIdActividad(jComboBoxActividad.getSelectedItem().toString()))){
+                    dispose();
                     new MensajeBorrado();
+                    
                 }
                 else{
-                    new MensajeErrorGuardado();
+                    new MensajeErrorBorrado();
                 }
                 
             } catch (SQLException ex) {

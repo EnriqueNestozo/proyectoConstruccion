@@ -5,6 +5,10 @@
  */
 package gui;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author fernandomanuel
@@ -16,6 +20,7 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
      */
     public MensajeConfirmacionBorrado() {
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -101,14 +106,22 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         EliminarActividad eliminar = new EliminarActividad();
-        eliminar.confirmacionBorrar(true);
+        try {
+            eliminar.confirmacionBorrar(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dispose();
     }//GEN-LAST:event_jBotonAceptarActionPerformed
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
         // TODO add your handling code here:
         EliminarActividad eliminar = new EliminarActividad();
-        eliminar.confirmacionBorrar(false);
+        try {
+            eliminar.confirmacionBorrar(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dispose();
     }//GEN-LAST:event_jBotonCancelarActionPerformed
 

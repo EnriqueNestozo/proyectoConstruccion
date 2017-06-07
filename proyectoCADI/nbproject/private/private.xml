@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/fernandomanuel/Documents/GitHub/proyectoConstruccion/proyectoCADI/src/dataaccess/ConexionBD.java</file>
-            <file>file:/C:/Users/fernandomanuel/Documents/GitHub/proyectoConstruccion/proyectoCADI/src/businesslogic/DAOClasses/ActividadDAO.java</file>
-            <file>file:/C:/Users/fernandomanuel/Documents/GitHub/proyectoConstruccion/proyectoCADI/src/gui/MensajeGuardado.java</file>
+            <file>file:/C:/Users/fernandomanuel/Documents/GitHub/proyectoConstruccion/proyectoCADI/src/gui/MensajeValidacion.java</file>
             <file>file:/C:/Users/fernandomanuel/Documents/GitHub/proyectoConstruccion/proyectoCADI/src/gui/AgregarActividad.java</file>
-            <file>file:/C:/Users/fernandomanuel/Documents/GitHub/proyectoConstruccion/proyectoCADI/src/gui/MenuActividad.java</file>
-            <file>file:/C:/Users/fernandomanuel/Documents/GitHub/proyectoConstruccion/proyectoCADI/src/businesslogic/Area.java</file>
-            <file>file:/C:/Users/fernandomanuel/Documents/GitHub/proyectoConstruccion/proyectoCADI/src/gui/EliminarActividad.java</file>
         </group>
     </open-files>
 </project-private>

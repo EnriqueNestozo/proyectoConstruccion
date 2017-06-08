@@ -124,6 +124,11 @@ public class MenuCoordinador extends javax.swing.JFrame {
         BotonReservaciones.setBackground(new java.awt.Color(0, 153, 0));
         BotonReservaciones.setForeground(new java.awt.Color(255, 255, 255));
         BotonReservaciones.setText("Administrar Reservaciones");
+        BotonReservaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonReservacionesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,6 +185,7 @@ public class MenuCoordinador extends javax.swing.JFrame {
 
     private void BotonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCerrarSesionActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_BotonCerrarSesionActionPerformed
 
     private void BotonAvisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAvisosActionPerformed
@@ -197,6 +203,10 @@ public class MenuCoordinador extends javax.swing.JFrame {
     private void BotonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonPerfilActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonPerfilActionPerformed
+
+    private void BotonReservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonReservacionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonReservacionesActionPerformed
 
     /**
      * @param args the command line arguments

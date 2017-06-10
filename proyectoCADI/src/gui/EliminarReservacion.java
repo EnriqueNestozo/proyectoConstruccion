@@ -38,7 +38,7 @@ public class EliminarReservacion extends javax.swing.JFrame {
     
     public void obtenerListaDeReservaciones(Alumno alumno){
         ReservacionDAO reservacion = new ReservacionDAO();
-        listaDeReservaciones = reservacion.mostrar(alumno);
+        listaDeReservaciones = reservacion.mostrarReservaciones(alumno);
     }
     
     public void mostrarTablaReservaciones(){

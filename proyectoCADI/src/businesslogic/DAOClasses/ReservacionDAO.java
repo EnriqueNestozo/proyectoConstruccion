@@ -37,7 +37,7 @@ public class ReservacionDAO extends ConexionBD {
         return reservacionCreada;
     }
     
-    public List<Reservacion> mostrar(Alumno alumno){
+    public List<Reservacion> mostrarReservaciones(Alumno alumno){
         List<Reservacion> listaDeReservacion = new ArrayList();
         try {
             this.conectar();
@@ -45,19 +45,29 @@ public class ReservacionDAO extends ConexionBD {
                     + " from reservacion, actividad where reservacion.matricula = ? AND reservacion.idActividad = actividad.idActividad");
             sentencia.setString(1, alumno.getMatricula());
             ResultSet resultado = sentencia.executeQuery();
-            while(resultado.next()){
-                Reservacion reservacion = new Reservacion();
-                reservacion.setIdReservacion(resultado.getString("idReservacion"));
-                reservacion.setFechaReservacion(resultado.getString("fechaReservacion"));
-                reservacion.setActividad(resultado.getString("nombre"));
-                listaDeReservacion.add(reservacion);
-            }
+            listaDeReservacion = crearListaDeReservaciones(resultado);
             this.cerrarConexion();
         } catch (SQLException e) {
             System.out.println("Error al conectar a la base de datos" + e.getMessage());
         }
         
         return listaDeReservacion;
+    }
+    
+    public List<Reservacion> crearListaDeReservaciones(ResultSet resultado){
+        List<Reservacion> listaCreada = new ArrayList();
+        try {
+            while(resultado.next()){
+                Reservacion reservacion = new Reservacion();
+                reservacion.setIdReservacion(resultado.getString("idReservacion"));
+                reservacion.setFechaReservacion(resultado.getString("fechaReservacion"));
+                reservacion.setActividad(resultado.getString("nombre"));
+                listaCreada.add(reservacion);
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo crear la lista " + e.getMessage());
+        }
+        return listaCreada;
     }
     
     public boolean buscarReservacion(Alumno alumno, Actividad actividad){

@@ -132,7 +132,6 @@ public class IngresarMatriculaReservacion extends javax.swing.JFrame {
                 EliminarReservacion eliminarReservacion = new EliminarReservacion(usuarioAlumno);
                 eliminarReservacion.setVisible(true);
             }
-            
             dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Matricula incorrecta, porfavor ingrese una matricula válida");

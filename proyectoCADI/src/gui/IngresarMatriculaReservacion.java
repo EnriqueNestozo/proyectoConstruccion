@@ -8,6 +8,7 @@ package gui;
 
 import businesslogic.Alumno;
 import businesslogic.DAOClasses.IngresarMatriculaReservacionDAO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,12 +16,16 @@ import businesslogic.DAOClasses.IngresarMatriculaReservacionDAO;
  */
 public class IngresarMatriculaReservacion extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IngresarMatriculaReservacion
-     */
+    int tipoOperacion = 0;
     public IngresarMatriculaReservacion() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public IngresarMatriculaReservacion(int tipoOperacion) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.tipoOperacion = tipoOperacion;
     }
 
     /**
@@ -44,9 +49,11 @@ public class IngresarMatriculaReservacion extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Matricula:");
 
-        btnBuscar.setBackground(new java.awt.Color(0, 153, 0));
+        btnBuscar.setBackground(new java.awt.Color(0, 175, 80));
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +61,8 @@ public class IngresarMatriculaReservacion extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(0, 153, 0));
+        btnCancelar.setBackground(new java.awt.Color(0, 175, 80));
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,11 +125,17 @@ public class IngresarMatriculaReservacion extends javax.swing.JFrame {
         Alumno usuarioAlumno = new Alumno();
         usuarioAlumno.setMatricula(txtMatricula.getText());
         if(ingresarMatricula.verificarMatricula(usuarioAlumno)){
-            RealizarReservacion realizarReservacion = new RealizarReservacion(usuarioAlumno);
-            realizarReservacion.setVisible(true);
+            if(tipoOperacion == 1){
+                RealizarReservacion realizarReservacion = new RealizarReservacion(usuarioAlumno);
+                realizarReservacion.setVisible(true);
+            }else{
+                EliminarReservacion eliminarReservacion = new EliminarReservacion(usuarioAlumno);
+                eliminarReservacion.setVisible(true);
+            }
+            
             dispose();
         }else{
-            System.out.println("no");
+            JOptionPane.showMessageDialog(null, "Matricula incorrecta, porfavor ingrese una matricula válida");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 

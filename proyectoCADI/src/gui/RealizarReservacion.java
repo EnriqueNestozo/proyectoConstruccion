@@ -20,11 +20,11 @@ import javax.swing.JOptionPane;
 public class RealizarReservacion extends javax.swing.JFrame {
     List<Actividad> listaDeActividades= new ArrayList();
     Alumno alumno = new Alumno();
+    
     public RealizarReservacion() {
         initComponents();
         setVisible(true);
         this.setLocationRelativeTo(null);
-        
     }
     
     public RealizarReservacion(Alumno usuarioAlumno){
@@ -35,28 +35,39 @@ public class RealizarReservacion extends javax.swing.JFrame {
         jlNombre.setText(alumno.getNombre());
         jlApellidoPaterno.setText(alumno.getApellidoPaterno());
         jlApellidoMaterno.setText(alumno.getApellidoMaterno());
-        
         mostrarActividades(alumno);
     }
     
     private void mostrarActividades(Alumno alumno){
         ActividadDAO actividades = new ActividadDAO();
         listaDeActividades = actividades.mostrarActividades(alumno);
+        jComboBoxActividades.addItem("Seleccione actividad");
         for(int i=0; i<listaDeActividades.size();i++){
             jComboBoxActividades.addItem(listaDeActividades.get(i).getNombreActividad());
-        }
-        jComboBoxActividades.setSelectedIndex(-1);
+        }      
     }
     
     private void llenarComboboxActividades(int opcionSeleccionada){
-        jLabelIdActividad.setText(listaDeActividades.get(opcionSeleccionada).getIdActividad());
-        jLabelNombre.setText(listaDeActividades.get(opcionSeleccionada).getNombreActividad());
-        jLabelCupo.setText(listaDeActividades.get(opcionSeleccionada).getCupo());
-        jLabelFecha.setText(listaDeActividades.get(opcionSeleccionada).getFechaActividad());
-        jLabelHoraInicio.setText(listaDeActividades.get(opcionSeleccionada).getHoraInicio());
-        jLabelHoraFin.setText(listaDeActividades.get(opcionSeleccionada).getHoraFin());
-        jLabelArea.setText(listaDeActividades.get(opcionSeleccionada).getArea());
-        jTextAreaDescripcion.setText(listaDeActividades.get(opcionSeleccionada).getDescripcion());
+        if(jComboBoxActividades.getSelectedItem().toString() != "Seleccione actividad"){
+            jLabelIdActividad.setText(listaDeActividades.get(opcionSeleccionada).getIdActividad());
+            jLabelNombre.setText(listaDeActividades.get(opcionSeleccionada).getNombreActividad());
+            jLabelCupo.setText(listaDeActividades.get(opcionSeleccionada).getCupo());
+            jLabelFecha.setText(listaDeActividades.get(opcionSeleccionada).getFechaActividad());
+            jLabelHoraInicio.setText(listaDeActividades.get(opcionSeleccionada).getHoraInicio());
+            jLabelHoraFin.setText(listaDeActividades.get(opcionSeleccionada).getHoraFin());
+            jLabelArea.setText(listaDeActividades.get(opcionSeleccionada).getArea());
+            jTextAreaDescripcion.setText(listaDeActividades.get(opcionSeleccionada).getDescripcion());
+        }else{
+            jLabelIdActividad.setText(null);
+            jLabelNombre.setText(null);
+            jLabelCupo.setText(null);
+            jLabelFecha.setText(null);
+            jLabelHoraInicio.setText(null);
+            jLabelHoraFin.setText(null);
+            jLabelArea.setText(null);
+            jTextAreaDescripcion.setText(null);
+        }
+        
     }
     
 
@@ -95,7 +106,7 @@ public class RealizarReservacion extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDescripcion = new javax.swing.JTextArea();
         jLabelDescripcion = new javax.swing.JLabel();
-        jComboBoxActividades = new javax.swing.JComboBox<String>();
+        jComboBoxActividades = new javax.swing.JComboBox<>();
         jLabelProximasActividades = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -106,6 +117,7 @@ public class RealizarReservacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 204));
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -120,7 +132,8 @@ public class RealizarReservacion extends javax.swing.JFrame {
 
         jLabelAPaterno.setText("Apellido Paterno:");
 
-        jButtonCancelar.setBackground(new java.awt.Color(0, 153, 0));
+        jButtonCancelar.setBackground(new java.awt.Color(0, 175, 80));
+        jButtonCancelar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +141,8 @@ public class RealizarReservacion extends javax.swing.JFrame {
             }
         });
 
-        jButtonReservar.setBackground(new java.awt.Color(0, 153, 0));
+        jButtonReservar.setBackground(new java.awt.Color(0, 175, 80));
+        jButtonReservar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonReservar.setText("Reservar");
         jButtonReservar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,21 +336,24 @@ public class RealizarReservacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActividadesActionPerformed
-        if(jComboBoxActividades.getSelectedIndex() != -1){
-            llenarComboboxActividades(jComboBoxActividades.getSelectedIndex());
-        }
+
+            llenarComboboxActividades(jComboBoxActividades.getSelectedIndex() - 1);
+        
     }//GEN-LAST:event_jComboBoxActividadesActionPerformed
 
     private void jButtonReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservarActionPerformed
         ReservacionDAO reservacion = new ReservacionDAO();
-        if(reservacion.buscarReservacion(alumno,listaDeActividades.get(jComboBoxActividades.getSelectedIndex()))){
-            JOptionPane.showMessageDialog(null, "El alumno ya cuenta con la reservacion a la actividad");
+        if(jComboBoxActividades.getSelectedItem().toString() == "Seleccione actividad"){
+            JOptionPane.showMessageDialog(null, "Porfavor seleccione una actividad");
         }else{
-            if(reservacion.crear(alumno, listaDeActividades.get(jComboBoxActividades.getSelectedIndex()))){
-                JOptionPane.showMessageDialog(null, "Actividad Reservada");
+            if(reservacion.buscarReservacion(alumno,listaDeActividades.get(jComboBoxActividades.getSelectedIndex() - 1))){
+                JOptionPane.showMessageDialog(null, "El alumno ya cuenta con la reservacion a la actividad");
+            }else{
+                if(reservacion.crear(alumno, listaDeActividades.get(jComboBoxActividades.getSelectedIndex() - 1))){
+                    JOptionPane.showMessageDialog(null, "Actividad Reservada");
+                }
             }
         }
-        dispose();
     }//GEN-LAST:event_jButtonReservarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

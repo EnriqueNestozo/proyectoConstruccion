@@ -35,10 +35,12 @@ public class MenuRecepcionista extends javax.swing.JFrame {
         jButtonCerrarSesion = new javax.swing.JButton();
         jButtonInscribirAlumno = new javax.swing.JButton();
         jButtonCancelarReservacion = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(51, 51, 51));
+        setBackground(new java.awt.Color(255, 255, 255));
         setName("MenuRecepcionista"); // NOI18N
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
@@ -54,7 +56,7 @@ public class MenuRecepcionista extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        btnRealizarReservacion.setBackground(new java.awt.Color(0, 153, 0));
+        btnRealizarReservacion.setBackground(new java.awt.Color(0, 175, 80));
         btnRealizarReservacion.setForeground(new java.awt.Color(255, 255, 255));
         btnRealizarReservacion.setText("Realizar Reservacion");
         btnRealizarReservacion.addActionListener(new java.awt.event.ActionListener() {
@@ -63,15 +65,15 @@ public class MenuRecepcionista extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 0));
+        jButton2.setBackground(new java.awt.Color(0, 175, 80));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("jButton1");
+        jButton2.setText("Consultar Calendario");
 
-        jButton3.setBackground(new java.awt.Color(0, 153, 0));
+        jButton3.setBackground(new java.awt.Color(0, 175, 80));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("jButton1");
+        jButton3.setText("Consultar Avisos");
 
-        jButtonCerrarSesion.setBackground(new java.awt.Color(0, 153, 0));
+        jButtonCerrarSesion.setBackground(new java.awt.Color(0, 175, 80));
         jButtonCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
         jButtonCerrarSesion.setText("Cerrar sesion");
         jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +82,7 @@ public class MenuRecepcionista extends javax.swing.JFrame {
             }
         });
 
-        jButtonInscribirAlumno.setBackground(new java.awt.Color(0, 153, 0));
+        jButtonInscribirAlumno.setBackground(new java.awt.Color(0, 175, 80));
         jButtonInscribirAlumno.setForeground(new java.awt.Color(255, 255, 255));
         jButtonInscribirAlumno.setText("inscribir Alumno");
         jButtonInscribirAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -89,9 +91,18 @@ public class MenuRecepcionista extends javax.swing.JFrame {
             }
         });
 
-        jButtonCancelarReservacion.setBackground(new java.awt.Color(0, 153, 0));
+        jButtonCancelarReservacion.setBackground(new java.awt.Color(0, 175, 80));
         jButtonCancelarReservacion.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonCancelarReservacion.setText("Cancelar Reservacion");
+        jButtonCancelarReservacion.setText("Eliminar Reservacion");
+        jButtonCancelarReservacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarReservacionActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(0, 175, 80));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Editar perfil");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,7 +116,8 @@ public class MenuRecepcionista extends javax.swing.JFrame {
                     .addComponent(jButtonCancelarReservacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonInscribirAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -115,15 +127,17 @@ public class MenuRecepcionista extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnRealizarReservacion)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonInscribirAlumno)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelarReservacion)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonInscribirAlumno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCerrarSesion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -141,9 +155,16 @@ public class MenuRecepcionista extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonInscribirAlumnoActionPerformed
 
     private void btnRealizarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarReservacionActionPerformed
-        IngresarMatriculaReservacion ingresarMatricula = new IngresarMatriculaReservacion();
+        int tipoOperacion = 1;
+        IngresarMatriculaReservacion ingresarMatricula = new IngresarMatriculaReservacion(tipoOperacion);
         ingresarMatricula.setVisible(true);
     }//GEN-LAST:event_btnRealizarReservacionActionPerformed
+
+    private void jButtonCancelarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarReservacionActionPerformed
+        int tipoOperacion = 2;
+        IngresarMatriculaReservacion ingresarMatricula = new IngresarMatriculaReservacion(tipoOperacion);
+        ingresarMatricula.setVisible(true);
+    }//GEN-LAST:event_jButtonCancelarReservacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,6 +207,7 @@ public class MenuRecepcionista extends javax.swing.JFrame {
     private javax.swing.JButton btnRealizarReservacion;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonCancelarReservacion;
     private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonInscribirAlumno;

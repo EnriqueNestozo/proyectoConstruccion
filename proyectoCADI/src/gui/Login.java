@@ -64,12 +64,14 @@ public class Login extends javax.swing.JFrame {
 
         txtNombre.setBackground(new java.awt.Color(0, 173, 79));
         txtNombre.setForeground(new java.awt.Color(255, 255, 255));
+        txtNombre.setBorder(null);
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 140, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 235, 140, 10));
 
         txtContrasenia.setBackground(new java.awt.Color(0, 173, 79));
         txtContrasenia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtContrasenia.setForeground(new java.awt.Color(255, 255, 255));
+        txtContrasenia.setBorder(null);
         txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContraseniaActionPerformed(evt);
@@ -85,6 +87,7 @@ public class Login extends javax.swing.JFrame {
         BotonSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         BotonSalir.setForeground(new java.awt.Color(255, 255, 255));
         BotonSalir.setText("Salir");
+        BotonSalir.setBorder(null);
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSalirActionPerformed(evt);
@@ -96,6 +99,7 @@ public class Login extends javax.swing.JFrame {
         BotonAccesar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         BotonAccesar.setForeground(new java.awt.Color(255, 255, 255));
         BotonAccesar.setText("Accesar");
+        BotonAccesar.setBorder(null);
         BotonAccesar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonAccesarActionPerformed(evt);

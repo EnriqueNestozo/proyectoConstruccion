@@ -14,10 +14,10 @@ import java.sql.ResultSet;
  * @author Enrique
  */
 public class Autenticacion extends ConexionBD {
-     private String strIdUsuario ="";
+     private String idUsuario ="";
    
     public Autenticacion(){
-        strIdUsuario = "";
+        idUsuario = "";
     }
     
     public boolean buscarUsuario(Usuario usuario) throws Exception{
@@ -41,11 +41,11 @@ public class Autenticacion extends ConexionBD {
     return autorizacion;    
     }
 
-    public String getStrIdUsuario() {
-        return strIdUsuario;
+    public String getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setStrIdUsuario(String strIdUsuario) {
-        this.strIdUsuario = strIdUsuario;
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

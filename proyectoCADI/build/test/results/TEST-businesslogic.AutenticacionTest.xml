@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="3" hostname="DESKTOP-9HP3FDS" name="businesslogic.AutenticacionTest" skipped="0" tests="3" time="0.232" timestamp="2017-06-10T02:35:38">
+<testsuite errors="0" failures="0" hostname="DESKTOP-9HP3FDS" name="businesslogic.AutenticacionTest" skipped="0" tests="4" time="0.285" timestamp="2017-06-10T20:18:32">
   <properties>
     <property name="netbeans.autoupdate.country" value="MX" />
     <property name="nb.wait.for.caches" value="true" />
@@ -38,7 +38,7 @@
     <property name="user.name" value="Enrique" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner businesslogic.AutenticacionTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\test\results\TEST-businesslogic.AutenticacionTest.xml crashfile=C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\junitvmwatcher4142093120314101699.properties propsfile=C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\junit3978096093477178673.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner businesslogic.AutenticacionTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\test\results\TEST-businesslogic.AutenticacionTest.xml crashfile=C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\junitvmwatcher2515999618995854857.properties propsfile=C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\junit7492573655390281685.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -312,24 +312,14 @@
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="businesslogic.AutenticacionTest" name="testGetStrIdUsuario" time="0.016">
-    <failure message="expected:&lt;[502]&gt; but was:&lt;[]&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: expected:&lt;[502]&gt; but was:&lt;[]&gt;
-	at businesslogic.AutenticacionTest.testGetStrIdUsuario(AutenticacionTest.java:47)
-</failure>
-  </testcase>
-  <testcase classname="businesslogic.AutenticacionTest" name="testBuscarUsuario" time="0.138">
-    <failure message="The test case is a prototype." type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: The test case is a prototype.
-	at businesslogic.AutenticacionTest.testBuscarUsuario(AutenticacionTest.java:35)
-</failure>
-  </testcase>
-  <testcase classname="businesslogic.AutenticacionTest" name="testSetStrIdUsuario" time="0.0">
-    <failure message="The test case is a prototype." type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: The test case is a prototype.
-	at businesslogic.AutenticacionTest.testSetStrIdUsuario(AutenticacionTest.java:62)
-</failure>
-  </testcase>
-  <system-out><![CDATA[getStrIdUsuario
+  <testcase classname="businesslogic.AutenticacionTest" name="testBuscarUsuarioIncorrecto" time="0.163" />
+  <testcase classname="businesslogic.AutenticacionTest" name="testGetIdUsuario" time="0.0" />
+  <testcase classname="businesslogic.AutenticacionTest" name="testBuscarUsuarioCorrecto" time="0.038" />
+  <testcase classname="businesslogic.AutenticacionTest" name="testSetIdUsuario" time="0.0" />
+  <system-out><![CDATA[buscarUsuario
+getIdUsuario
 buscarUsuario
-setStrIdUsuario
+setIdUsuario
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="DESKTOP-9HP3FDS" name="gui.LoginTest" skipped="0" tests="1" time="0.285" timestamp="2017-06-10T20:18:33">
+<testsuite errors="4" failures="1" hostname="DESKTOP-9HP3FDS" name="businesslogic.DAOClasses.ReservacionDAOTest" skipped="0" tests="5" time="0.333" timestamp="2017-06-10T20:18:33">
   <properties>
     <property name="netbeans.autoupdate.country" value="MX" />
     <property name="nb.wait.for.caches" value="true" />
@@ -38,7 +38,7 @@
     <property name="user.name" value="Enrique" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner gui.LoginTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\test\results\TEST-gui.LoginTest.xml crashfile=C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\junitvmwatcher9134769670787187158.properties propsfile=C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\junit1503786382130349346.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner businesslogic.DAOClasses.ReservacionDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\test\results\TEST-businesslogic.DAOClasses.ReservacionDAOTest.xml crashfile=C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\junitvmwatcher1945725899698467347.properties propsfile=C:\Users\Enrique\Documents\Principios de construccion de software\proyecto\proyectoCADI\build\junit7873688217920300634.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -167,7 +167,6 @@
     <property name="org.openide.major.version" value="IDE/1" />
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
     <property name="netbeans.user" value="C:\Users\Enrique\AppData\Roaming\NetBeans\8.2" />
-    <property name="tests.failed" value="true" />
     <property name="javadoc.additionalparam" value="" />
     <property name="java.io.tmpdir" value="C:\Users\Enrique\AppData\Local\Temp\" />
     <property name="java.vendor.url" value="http://java.oracle.com/" />
@@ -302,8 +301,8 @@
     <property name="libs.hibernate4-persistencemodelgen.classpath" value="C:\Program Files\NetBeans 8.2\java\modules\ext\hibernate4\hibernate-jpamodelgen-4.3.1.Final.jar" />
     <property name="annotation.processing.source.output" value="build/generated-sources/ap-source-output" />
     <property name="main.class" value="proyectocadi.ProyectoCADI" />
-    <property name="build.dir" value="build" />
     <property name="libs.CopyLibs.src" value="" />
+    <property name="build.dir" value="build" />
     <property name="file.reference.mysql-connector-java-3.0.17-ga-bin.jar-1" value="..\..\..\..\Downloads\mysql-connector-java-3.0.17-ga\mysql-connector-java-3.0.17-ga\mysql-connector-java-3.0.17-ga-bin.jar" />
     <property name="ant.version" value="Apache Ant(TM) version 1.9.7 compiled on April 9 2016" />
     <property name="file.encoding" value="Cp1252" />
@@ -313,8 +312,41 @@
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="gui.LoginTest" name="testMain" time="0.216" />
-  <system-out><![CDATA[main
+  <testcase classname="businesslogic.DAOClasses.ReservacionDAOTest" name="testEliminarReservacion" time="0.216">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at businesslogic.DAOClasses.ReservacionDAO.eliminarReservacion(ReservacionDAO.java:97)
+	at businesslogic.DAOClasses.ReservacionDAOTest.testEliminarReservacion(ReservacionDAOTest.java:88)
+</error>
+  </testcase>
+  <testcase classname="businesslogic.DAOClasses.ReservacionDAOTest" name="testMostrarReservaciones" time="0.015">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at businesslogic.DAOClasses.ReservacionDAO.mostrarReservaciones(ReservacionDAO.java:46)
+	at businesslogic.DAOClasses.ReservacionDAOTest.testMostrarReservaciones(ReservacionDAOTest.java:48)
+</error>
+  </testcase>
+  <testcase classname="businesslogic.DAOClasses.ReservacionDAOTest" name="testCrear" time="0.016">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at businesslogic.DAOClasses.ReservacionDAO.crear(ReservacionDAO.java:28)
+	at businesslogic.DAOClasses.ReservacionDAOTest.testCrear(ReservacionDAOTest.java:35)
+</error>
+  </testcase>
+  <testcase classname="businesslogic.DAOClasses.ReservacionDAOTest" name="testCrearListaDeReservaciones" time="0.0">
+    <failure message="expected:&lt;null&gt; but was:&lt;[]&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: expected:&lt;null&gt; but was:&lt;[]&gt;
+	at businesslogic.DAOClasses.ReservacionDAOTest.testCrearListaDeReservaciones(ReservacionDAOTest.java:62)
+</failure>
+  </testcase>
+  <testcase classname="businesslogic.DAOClasses.ReservacionDAOTest" name="testBuscarReservacion" time="0.016">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at businesslogic.DAOClasses.ReservacionDAO.buscarReservacion(ReservacionDAO.java:78)
+	at businesslogic.DAOClasses.ReservacionDAOTest.testBuscarReservacion(ReservacionDAOTest.java:75)
+</error>
+  </testcase>
+  <system-out><![CDATA[eliminarReservacion
+mostrarReservaciones
+crear
+crearListaDeReservaciones
+No se pudo crear la lista null
+buscarReservacion
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

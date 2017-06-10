@@ -12,9 +12,16 @@ package businesslogic;
 public class Reservacion {
     private String idReservacion = "";
     private String fechaReservacion = "";
-    private String diaReservacion = "";
-    private String mesReservacion = "";
-    private String anioReservacion = "";
+    private String Actividad = "";
+
+    public String getActividad() {
+        return Actividad;
+    }
+
+    public void setActividad(String Actividad) {
+        this.Actividad = Actividad;
+    }
+    
 
     public String getIdReservacion() {
         return idReservacion;
@@ -30,30 +37,6 @@ public class Reservacion {
 
     public void setFechaReservacion(String fechaReservacion) {
         this.fechaReservacion = fechaReservacion;
-    }
-
-    public String getDiaReservacion() {
-        return diaReservacion;
-    }
-
-    public void setDiaReservacion(String diaReservacion) {
-        this.diaReservacion = diaReservacion;
-    }
-
-    public String getMesReservacion() {
-        return mesReservacion;
-    }
-
-    public void setMesReservacion(String mesReservacion) {
-        this.mesReservacion = mesReservacion;
-    }
-
-    public String getAnioReservacion() {
-        return anioReservacion;
-    }
-
-    public void setAnioReservacion(String anioReservacion) {
-        this.anioReservacion = anioReservacion;
     }
     
 }

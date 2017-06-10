@@ -32,17 +32,31 @@ public class ReservacionDAO extends ConexionBD {
             }
             
         } catch (SQLException e) {
-            System.out.println("No se pudo hacer la reservacion" + e.getMessage());
+            System.out.println("Error al conectar a la base de datos, no se pudo hacer la reservacion" + e.getMessage());
         }
         return reservacionCreada;
     }
     
-    public void eliminar(Reservacion reservacion){
-        
-    }
-    
-    public List<Reservacion> mostrar(){
+    public List<Reservacion> mostrar(Alumno alumno){
         List<Reservacion> listaDeReservacion = new ArrayList();
+        try {
+            this.conectar();
+            PreparedStatement sentencia = this.conexion.prepareStatement("select reservacion.idReservacion, reservacion.fechaReservacion, actividad.nombre"
+                    + " from reservacion, actividad where reservacion.matricula = ? AND reservacion.idActividad = actividad.idActividad");
+            sentencia.setString(1, alumno.getMatricula());
+            ResultSet resultado = sentencia.executeQuery();
+            while(resultado.next()){
+                Reservacion reservacion = new Reservacion();
+                reservacion.setIdReservacion(resultado.getString("idReservacion"));
+                reservacion.setFechaReservacion(resultado.getString("fechaReservacion"));
+                reservacion.setActividad(resultado.getString("nombre"));
+                listaDeReservacion.add(reservacion);
+            }
+            this.cerrarConexion();
+        } catch (SQLException e) {
+            System.out.println("Error al conectar a la base de datos" + e.getMessage());
+        }
+        
         return listaDeReservacion;
     }
     
@@ -59,8 +73,26 @@ public class ReservacionDAO extends ConexionBD {
             }
             this.cerrarConexion();
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println("Error al conectar a la base de datos" + e.getMessage());
         }
         return yaReservada;
+    }
+    
+    public boolean eliminarReservacion(Reservacion reservacion){
+        boolean reservacionEliminada = false;
+        try {
+            this.conectar();
+            PreparedStatement sentencia = this.conexion.prepareStatement("delete from reservacion where idReservacion =?");
+            sentencia.setString(1, reservacion.getIdReservacion());
+            if(sentencia.executeUpdate() == 1){
+                reservacionEliminada = true;
+            }
+            this.cerrarConexion();
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar la reservacion" + e.getMessage());
+        }
+        
+        return reservacionEliminada;
     }
 }

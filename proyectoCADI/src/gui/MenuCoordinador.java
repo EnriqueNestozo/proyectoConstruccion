@@ -41,6 +41,7 @@ public class MenuCoordinador extends javax.swing.JFrame {
         BotonReservaciones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
@@ -56,7 +57,7 @@ public class MenuCoordinador extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        BotonCerrarSesion.setBackground(new java.awt.Color(0, 153, 0));
+        BotonCerrarSesion.setBackground(new java.awt.Color(0, 175, 80));
         BotonCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
         BotonCerrarSesion.setText("Cerrar sesion");
         BotonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -65,11 +66,11 @@ public class MenuCoordinador extends javax.swing.JFrame {
             }
         });
 
-        BotonSeccion.setBackground(new java.awt.Color(0, 153, 0));
+        BotonSeccion.setBackground(new java.awt.Color(0, 175, 80));
         BotonSeccion.setForeground(new java.awt.Color(255, 255, 255));
         BotonSeccion.setText("Administrar Seccion");
 
-        BotonCurso.setBackground(new java.awt.Color(0, 153, 0));
+        BotonCurso.setBackground(new java.awt.Color(0, 175, 80));
         BotonCurso.setForeground(new java.awt.Color(255, 255, 255));
         BotonCurso.setText("Administrar Curso");
         BotonCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +79,7 @@ public class MenuCoordinador extends javax.swing.JFrame {
             }
         });
 
-        BotonActividad.setBackground(new java.awt.Color(0, 153, 0));
+        BotonActividad.setBackground(new java.awt.Color(0, 175, 80));
         BotonActividad.setForeground(new java.awt.Color(255, 255, 255));
         BotonActividad.setText("Administrar Actividad");
         BotonActividad.addActionListener(new java.awt.event.ActionListener() {
@@ -87,11 +88,11 @@ public class MenuCoordinador extends javax.swing.JFrame {
             }
         });
 
-        BotonExperienciaEducativa.setBackground(new java.awt.Color(0, 153, 0));
+        BotonExperienciaEducativa.setBackground(new java.awt.Color(0, 175, 80));
         BotonExperienciaEducativa.setForeground(new java.awt.Color(255, 255, 255));
         BotonExperienciaEducativa.setText("Administrar E.E.");
 
-        BotonAvisos.setBackground(new java.awt.Color(0, 153, 0));
+        BotonAvisos.setBackground(new java.awt.Color(0, 175, 80));
         BotonAvisos.setForeground(new java.awt.Color(255, 255, 255));
         BotonAvisos.setText("Administrar Avisos");
         BotonAvisos.addActionListener(new java.awt.event.ActionListener() {
@@ -100,15 +101,15 @@ public class MenuCoordinador extends javax.swing.JFrame {
             }
         });
 
-        BotonIdioma.setBackground(new java.awt.Color(0, 153, 0));
+        BotonIdioma.setBackground(new java.awt.Color(0, 175, 80));
         BotonIdioma.setForeground(new java.awt.Color(255, 255, 255));
         BotonIdioma.setText("Administrar Idioma");
 
-        BotonInscripcion.setBackground(new java.awt.Color(0, 153, 0));
+        BotonInscripcion.setBackground(new java.awt.Color(0, 175, 80));
         BotonInscripcion.setForeground(new java.awt.Color(255, 255, 255));
         BotonInscripcion.setText("Administrar Inscripcion");
 
-        BotonPerfil.setBackground(new java.awt.Color(0, 153, 0));
+        BotonPerfil.setBackground(new java.awt.Color(0, 175, 80));
         BotonPerfil.setForeground(new java.awt.Color(255, 255, 255));
         BotonPerfil.setText("Editar Perfil");
         BotonPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -117,11 +118,11 @@ public class MenuCoordinador extends javax.swing.JFrame {
             }
         });
 
-        BotonRegistrarUsuario.setBackground(new java.awt.Color(0, 153, 0));
+        BotonRegistrarUsuario.setBackground(new java.awt.Color(0, 175, 80));
         BotonRegistrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
         BotonRegistrarUsuario.setText("Registrar Usuario");
 
-        BotonReservaciones.setBackground(new java.awt.Color(0, 153, 0));
+        BotonReservaciones.setBackground(new java.awt.Color(0, 175, 80));
         BotonReservaciones.setForeground(new java.awt.Color(255, 255, 255));
         BotonReservaciones.setText("Administrar Reservaciones");
         BotonReservaciones.addActionListener(new java.awt.event.ActionListener() {

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package gui;
+import businesslogic.DAOClasses.CursoDAO;
 import businesslogic.Actividad;
 import businesslogic.Area;
 import businesslogic.Curso;
@@ -24,6 +25,7 @@ import java.util.GregorianCalendar;
  */
 public class AgregarActividad extends javax.swing.JFrame {
     ActividadDAO actividadDao = new ActividadDAO();
+    CursoDAO cursoDao = new CursoDAO();
     String idActividad;
     String idCurso;
     Calendar calendario;
@@ -157,7 +159,6 @@ public class AgregarActividad extends javax.swing.JFrame {
 
         jLabelHoraInicio.setText("Hora inicio:");
 
-        jComboBoxInicioHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "7","8","9","10","11","12","13","14","15","16","17","18","19","20" }));
         jComboBoxInicioHora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxInicioHoraActionPerformed(evt);
@@ -384,7 +385,7 @@ public class AgregarActividad extends javax.swing.JFrame {
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
         try {
-            this.idCurso = actividadDao.obtenerIdCurso(jComboBoxCurso.getSelectedItem().toString());
+            this.idCurso = cursoDao.obtenerIdCurso(jComboBoxCurso.getSelectedItem().toString());
             Actividad actividad = new Actividad(TextFieldIDActividad.getText(), 
                  jTextFieldNombreActividad.getText(),
                  jTextAreaDetalles.getText(), 
@@ -415,12 +416,20 @@ public class AgregarActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jComboBoxAño.getSelectedIndex()==0&&mesActual==jComboBoxMes.getSelectedIndex()+mesActual&&jComboBoxDia.getSelectedIndex()+diaHoy==diaHoy&&jComboBoxInicioHora.getSelectedIndex()+horaActual==horaActual){
             llenaMinutosInicio(minutoActual);
-            recorrerHoraComboBo(horaActual-8);
+            recorrerHoraComboBo(horaActual);
         }
         else{
-            llenaMinutosInicio(1);
-            recorrerHoraComboBo(jComboBoxInicioHora.getSelectedIndex()); 
+            if(jComboBoxAño.getSelectedIndex()==0&&mesActual==jComboBoxMes.getSelectedIndex()+mesActual&&jComboBoxDia.getSelectedIndex()+diaHoy==diaHoy&&jComboBoxInicioHora.getSelectedIndex()+horaActual!=horaActual){
+            llenaMinutosInicio(0);
+            recorrerHoraComboBo(horaActual+jComboBoxInicioHora.getSelectedIndex()); 
+            }
+            else{
+            llenaMinutosInicio(0);
+            recorrerHoraComboBo(jComboBoxInicioHora.getSelectedIndex()+7);
+            }
         }
+        
+        
     }//GEN-LAST:event_jComboBoxInicioHoraActionPerformed
     private void jTextFieldNombreActividadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreActividadKeyTyped
         // TODO add your handling code here:
@@ -434,6 +443,10 @@ public class AgregarActividad extends javax.swing.JFrame {
 
     private void jComboBoxInicioMinutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioMinutosActionPerformed
         // TODO add your handling code here:
+        if("20".equals(jComboBoxHoraFin.getSelectedItem().toString())){
+            mismaHora(jComboBoxInicioMinutos.getSelectedIndex()+minutoActual);
+        } else {
+        }
     }//GEN-LAST:event_jComboBoxInicioMinutosActionPerformed
 
     private void jComboBoxAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAñoActionPerformed
@@ -451,16 +464,15 @@ public class AgregarActividad extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jComboBoxDiaActionPerformed
-    private void recorrerHoraComboBo(int index){
-        if(index==13){
-            jComboBoxHoraFin.removeAllItems();
+    private void recorrerHoraComboBo(int horaSelecionada){
+        jComboBoxHoraFin.removeAllItems();
+        if(horaSelecionada==20){
             jComboBoxHoraFin.addItem(20);
             mismaHora(Integer.parseInt(jComboBoxInicioMinutos.getSelectedItem().toString()));
         }
         else{
-            jComboBoxHoraFin.removeAllItems();
-        for(int i=index+1; i<=13;i++){
-            jComboBoxHoraFin.addItem(i+7);
+        for(int i=horaSelecionada+1; i<=21;i++){
+            jComboBoxHoraFin.addItem(i);
             }
         mismaHora(-1);
         }
@@ -473,7 +485,7 @@ public class AgregarActividad extends javax.swing.JFrame {
     }
     private void mostrarCursos() throws SQLException{
         List<Curso> listaCursos = new ArrayList();
-        listaCursos=actividadDao.mostrarCursos();
+        listaCursos=cursoDao.mostrarCursos();
         for(int i=0; i<listaCursos.size();i++){
            jComboBoxCurso.addItem(listaCursos.get(i).getNombreCurso());
         }
@@ -518,10 +530,8 @@ public class AgregarActividad extends javax.swing.JFrame {
     private void llenaDias(int dias){
         jComboBoxDia.removeAllItems();
         int diaInicio=1;
-        if(jComboBoxAño.getSelectedIndex()==0){
-            if(mesActual==jComboBoxMes.getSelectedIndex()+mesActual){
+        if(jComboBoxAño.getSelectedIndex()==0&&mesActual==jComboBoxMes.getSelectedIndex()+mesActual){
                 diaInicio=calendario.get(Calendar.DAY_OF_MONTH);
-            }
         }
         for(int i=diaInicio; i<=dias;i++){
             jComboBoxDia.addItem(i);

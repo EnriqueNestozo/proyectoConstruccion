@@ -126,7 +126,7 @@ public class ActividadDAOTest {
         String nombreCurso = "";
         ActividadDAO instance = new ActividadDAO();
         String expResult = "";
-        String result = instance.obtenerIdCurso(nombreCurso);
+        String result = instance.obtenerIdCurso(nombreCurso, this);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -140,7 +140,7 @@ public class ActividadDAOTest {
         System.out.println("mostrarCursos");
         ActividadDAO instance = new ActividadDAO();
         List<Curso> expResult = null;
-        List<Curso> result = instance.mostrarCursos();
+        List<Curso> result = instance.mostrarCursos(this);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

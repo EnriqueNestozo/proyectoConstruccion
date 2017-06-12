@@ -5,6 +5,13 @@
  */
 package businesslogic;
 
+import businesslogic.DAOClasses.ActividadDAO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Enrique
@@ -46,4 +53,5 @@ public class Curso {
     public void setAnio(String anio) {
         this.anio = anio;
     }
+
 }

@@ -1,6 +1,8 @@
 
 package businesslogic;
 
+import java.util.List;
+
 /**
  *
  * @author Enrique
@@ -102,6 +104,10 @@ public class Actividad {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public List<Actividad> mostrarActividadIdioma(String obtenerIdCurso) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

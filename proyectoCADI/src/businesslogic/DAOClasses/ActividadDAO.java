@@ -110,37 +110,6 @@ public String obtenerMaxIdActividad() throws SQLException{
     }
     return String.valueOf(idActividad);
 }
-public String obtenerIdCurso(String nombreCurso) throws SQLException{
-    ResultSet resultado=null;
-    try{
-        this.conectar();
-        PreparedStatement sentencia=this.conexion.prepareStatement("select idCurso from curso where nombre = ?");
-        sentencia.setString(1, nombreCurso);
-        resultado = sentencia.executeQuery();
-        resultado.next();
-        this.cerrarConexion();
-    }catch(SQLException e){
-        System.out.println(e);
-    }   
-    return resultado.getString("idCurso");
-    }
-public List<Curso>mostrarCursos() throws SQLException{
-    List<Curso> listaCursos = new ArrayList();
-    try{
-        this.conectar(); 
-        PreparedStatement sentencia=this.conexion.prepareStatement("select * from curso");
-        ResultSet resultado =sentencia.executeQuery();
-        while(resultado.next()){
-            Curso curso = new Curso();
-            curso.setIdCurso(resultado.getString("idCurso"));
-            curso.setNombreCurso(resultado.getString("nombre"));
-            listaCursos.add(curso);
-        }
-    }catch(SQLException e){
-        System.out.println(e);        
-    }
-        return listaCursos ;
-}
 public List<Area>mostrarAreas() throws SQLException{
     List<Area> listaAreas = new ArrayList();
     try{

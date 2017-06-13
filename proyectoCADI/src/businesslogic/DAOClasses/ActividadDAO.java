@@ -84,7 +84,7 @@ public boolean borrarActividad(String idActividad){
     boolean borrado=false;
     try{
         this.conectar();
-        PreparedStatement sentencia=this.conexion.prepareStatement("delete from actividad where idACtividad = ?");
+            PreparedStatement sentencia=this.conexion.prepareStatement(" UPDATE actividad SET estado= 0 WHERE idActividad = ?");
         sentencia.setString(1, idActividad);
         if(!sentencia.execute()){
             borrado=true;}

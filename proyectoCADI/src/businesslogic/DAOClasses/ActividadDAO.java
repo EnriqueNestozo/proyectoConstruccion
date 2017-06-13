@@ -141,39 +141,8 @@ public class ActividadDAO{
         }
         return String.valueOf(idActividad);
     }
-public String obtenerIdCurso(String nombreCurso) throws SQLException{
-    ResultSet resultado=null;
-    ConexionBD conexionMysql = new ConexionBD();
-    try{
-        conexionMysql.conectar();
-        PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select idCurso from curso where nombre = ?");
-        sentencia.setString(1, nombreCurso);
-        resultado = sentencia.executeQuery();
-        resultado.next();
-        conexionMysql.cerrarConexion();
-    }catch(SQLException e){
-        System.out.println(e);
-    }   
-    return resultado.getString("idCurso");
-    }
-public List<Curso>mostrarCursos() throws SQLException{
-    List<Curso> listaCursos = new ArrayList();
-    ConexionBD conexionMysql = new ConexionBD();
-    try{
-        conexionMysql.conectar(); 
-        PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select * from curso");
-        ResultSet resultado =sentencia.executeQuery();
-        while(resultado.next()){
-            Curso curso = new Curso();
-            curso.setIdCurso(resultado.getString("idCurso"));
-            curso.setNombreCurso(resultado.getString("nombre"));
-            listaCursos.add(curso);
-        }
-    }catch(SQLException e){
-        System.out.println(e);        
-    }
-        return listaCursos ;
-}
+
+
 public List<Area>mostrarAreas() throws SQLException{
     List<Area> listaAreas = new ArrayList();
     ConexionBD conexionMysql = new ConexionBD();
@@ -216,13 +185,43 @@ public List<Area>mostrarAreas() throws SQLException{
         ConexionBD conexionMysql = new ConexionBD();
         try {
             conexionMysql.conectar();
-            PreparedStatement sentencia = conexionMysql.conexion.prepareStatement("update actividad set cupo = ? where idCurso = ?");
+            if(actividad.getArea() == null || actividad.getCupo() == 0){
+                actividad = buscarActividad(actividad);
+                actividad.setCupo(actividad.getCupo() + 1);
+            }
+            PreparedStatement sentencia = conexionMysql.conexion.prepareStatement("update actividad set cupo = ? where idActividad = ?");
             sentencia.setInt(1, actividad.getCupo());
             sentencia.setString(2, actividad.getIdActividad());
-            System.out.println(sentencia.executeUpdate());
+            sentencia.executeUpdate();
         } catch (Exception e) {
             System.out.println("No se pudo actualizar el cupo de la actividad" + e.getMessage());
         }
+    }
+    
+    public Actividad buscarActividad(Actividad actividad){
+        ConexionBD conexionMysql = new ConexionBD();
+        Actividad actividadEncontrada = new Actividad();
+        try {
+            conexionMysql.conectar();
+            PreparedStatement sentencia = conexionMysql.conexion.prepareStatement("select * from actividad where idActividad = ?");
+            sentencia.setString(1, actividad.getIdActividad());
+            ResultSet resultado = sentencia.executeQuery();          
+            if(resultado.next()){
+                actividadEncontrada.setIdActividad(resultado.getString("idActividad"));
+                actividadEncontrada.setNombreActividad(resultado.getString("nombre"));
+                actividadEncontrada.setDescripcion(resultado.getString("descripcion"));
+                actividadEncontrada.setCupo(resultado.getInt("cupo"));
+                actividadEncontrada.setArea(resultado.getString("numeroArea"));
+                actividadEncontrada.setFechaActividad(resultado.getString("fechaActividad"));
+                actividadEncontrada.setHoraInicio(resultado.getString("horaInicio"));
+                actividadEncontrada.setHoraFin(resultado.getString("horaFin"));
+                actividadEncontrada.setArea(resultado.getString("numeroArea"));
+                actividadEncontrada.setIdCurso(resultado.getString("idCurso"));
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo encontrar la actividad" + e.getMessage());
+        }
+        return actividadEncontrada;
     }
 
     /**

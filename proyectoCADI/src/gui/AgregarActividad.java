@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package gui;
+import businesslogic.DAOClasses.CursoDAO;
 import businesslogic.Actividad;
 import businesslogic.Area;
 import businesslogic.Curso;
@@ -11,23 +12,37 @@ import businesslogic.DAOClasses.ActividadDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import java.util.GregorianCalendar;
 /**
  *
  * @author fernandomanuel
  */
 public class AgregarActividad extends javax.swing.JFrame {
     ActividadDAO actividadDao = new ActividadDAO();
+    CursoDAO cursoDao = new CursoDAO();
     String idActividad;
     String idCurso;
+    Calendar calendario;
+    int mesActual;
+    int diaHoy;
+    int horaActual;
+    int minutoActual;
+    
     /**
      * Creates new form AgregarActividad
      */
     public AgregarActividad() {
+        calendario = new  GregorianCalendar();
+        mesActual=calendario.get(Calendar.MONTH);
+        diaHoy=calendario.get(calendario.DAY_OF_MONTH);
+        horaActual=calendario.get(calendario.HOUR_OF_DAY);
+        minutoActual=calendario.get(calendario.MINUTE);
         try{
             this.idActividad = actividadDao.obtenerMaxIdActividad();
             initComponents();
@@ -64,7 +79,6 @@ public class AgregarActividad extends javax.swing.JFrame {
         jComboBoxDia = new javax.swing.JComboBox();
         jComboBoxMes = new javax.swing.JComboBox();
         jLabelAño = new javax.swing.JLabel();
-        jTextFieldAño = new javax.swing.JTextField();
         jLabelHoraInicio = new javax.swing.JLabel();
         jComboBoxInicioHora = new javax.swing.JComboBox();
         jLabelDosPuntos = new javax.swing.JLabel();
@@ -80,6 +94,7 @@ public class AgregarActividad extends javax.swing.JFrame {
         jLabelArea = new javax.swing.JLabel();
         jComboBoxCurso = new javax.swing.JComboBox();
         jComboBoxArea = new javax.swing.JComboBox();
+        jComboBoxAño = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -128,9 +143,12 @@ public class AgregarActividad extends javax.swing.JFrame {
 
         jLabelMes.setText("Mes:");
 
-        jComboBoxDia.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30" }));
+        jComboBoxDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDiaActionPerformed(evt);
+            }
+        });
 
-        jComboBoxMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         jComboBoxMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxMesActionPerformed(evt);
@@ -139,17 +157,8 @@ public class AgregarActividad extends javax.swing.JFrame {
 
         jLabelAño.setText("Año:");
 
-        jTextFieldAño.setEditable(false);
-        jTextFieldAño.setText("2017");
-        jTextFieldAño.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAñoActionPerformed(evt);
-            }
-        });
-
         jLabelHoraInicio.setText("Hora inicio:");
 
-        jComboBoxInicioHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "7","8","9","10","11","12","13","14","15","16","17","18","19","20" }));
         jComboBoxInicioHora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxInicioHoraActionPerformed(evt);
@@ -196,6 +205,13 @@ public class AgregarActividad extends javax.swing.JFrame {
 
         jLabelArea.setText("Area:");
 
+        jComboBoxAño.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2017","2018" }));
+        jComboBoxAño.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAñoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAgregarACtividadLayout = new javax.swing.GroupLayout(jPanelAgregarACtividad);
         jPanelAgregarACtividad.setLayout(jPanelAgregarACtividadLayout);
         jPanelAgregarACtividadLayout.setHorizontalGroup(
@@ -222,24 +238,23 @@ public class AgregarActividad extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBoxMinutosFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButtonGuardar))
-                        .addGap(6, 6, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)
-                        .addGap(89, 89, 89))
+                        .addContainerGap(88, Short.MAX_VALUE))
                     .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
                         .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelFecha)
                             .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
-                                .addComponent(jLabelDia)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxDia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelNombreActividad)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabelMes)
+                                .addComponent(jTextFieldNombreActividad))
+                            .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabelDetalles)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelAño)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldAño, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1)))
+                        .addContainerGap())
+                    .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
+                        .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
                                 .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabelCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -257,20 +272,21 @@ public class AgregarActividad extends javax.swing.JFrame {
                                     .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
                                         .addComponent(jLabelArea)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBoxArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
-                        .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jComboBoxArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
-                                .addComponent(jLabelNombreActividad)
+                                .addComponent(jLabelAño)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxAño, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldNombreActividad))
-                            .addGroup(jPanelAgregarACtividadLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabelDetalles)
+                                .addComponent(jLabelMes)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1)))
-                        .addContainerGap())))
+                                .addComponent(jLabelDia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxDia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelFecha))
+                        .addContainerGap(44, Short.MAX_VALUE))))
         );
         jPanelAgregarACtividadLayout.setVerticalGroup(
             jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,12 +315,12 @@ public class AgregarActividad extends javax.swing.JFrame {
                 .addComponent(jLabelFecha)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDia)
                     .addComponent(jLabelMes)
-                    .addComponent(jComboBoxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelAño)
-                    .addComponent(jTextFieldAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelDia)
+                    .addComponent(jComboBoxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAgregarACtividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelHoraInicio)
@@ -350,11 +366,12 @@ public class AgregarActividad extends javax.swing.JFrame {
 
     private void jComboBoxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMesActionPerformed
         // TODO add your handling code here:
+        if(jComboBoxAño.getSelectedIndex()==0){
+               mesLargo(mesActual+jComboBoxMes.getSelectedIndex());
+        }else{
+            mesLargo(jComboBoxMes.getSelectedIndex());
+        }
     }//GEN-LAST:event_jComboBoxMesActionPerformed
-
-    private void jTextFieldAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAñoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldAñoActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
@@ -368,14 +385,14 @@ public class AgregarActividad extends javax.swing.JFrame {
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
         try {
-            this.idCurso = actividadDao.obtenerIdCurso(jComboBoxCurso.getSelectedItem().toString());
+            this.idCurso = cursoDao.obtenerIdCurso(jComboBoxCurso.getSelectedItem().toString());
             Actividad actividad = new Actividad(TextFieldIDActividad.getText(), 
                  jTextFieldNombreActividad.getText(),
                  jTextAreaDetalles.getText(), 
                  jComboBoxCupo.getSelectedIndex(),
                  jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),
                  jComboBoxHoraFin.getSelectedItem().toString()+":"+jComboBoxMinutosFin.getSelectedItem().toString(),
-                 jTextFieldAño.getText()+"-"+jComboBoxMes.getSelectedItem().toString()+"-"+jComboBoxDia.getSelectedItem().toString()+" "+jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),
+                 jComboBoxAño.getSelectedItem().toString()+"-"+jComboBoxMes.getSelectedItem().toString()+"-"+jComboBoxDia.getSelectedItem().toString()+" "+jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),
                  jComboBoxArea.getSelectedItem().toString());
             if(!actividadDao.validar(actividad)){
                  if(actividadDao.guardaActividad(actividad,idCurso)){
@@ -397,7 +414,22 @@ public class AgregarActividad extends javax.swing.JFrame {
 
     private void jComboBoxInicioHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioHoraActionPerformed
         // TODO add your handling code here:
-        recorrerHoraComboBo(jComboBoxInicioHora.getSelectedIndex()); 
+        if(jComboBoxAño.getSelectedIndex()==0&&mesActual==jComboBoxMes.getSelectedIndex()+mesActual&&jComboBoxDia.getSelectedIndex()+diaHoy==diaHoy&&jComboBoxInicioHora.getSelectedIndex()+horaActual==horaActual){
+            llenaMinutosInicio(minutoActual);
+            recorrerHoraComboBo(horaActual);
+        }
+        else{
+            if(jComboBoxAño.getSelectedIndex()==0&&mesActual==jComboBoxMes.getSelectedIndex()+mesActual&&jComboBoxDia.getSelectedIndex()+diaHoy==diaHoy&&jComboBoxInicioHora.getSelectedIndex()+horaActual!=horaActual){
+            llenaMinutosInicio(0);
+            recorrerHoraComboBo(horaActual+jComboBoxInicioHora.getSelectedIndex()); 
+            }
+            else{
+            llenaMinutosInicio(0);
+            recorrerHoraComboBo(jComboBoxInicioHora.getSelectedIndex()+7);
+            }
+        }
+        
+        
     }//GEN-LAST:event_jComboBoxInicioHoraActionPerformed
     private void jTextFieldNombreActividadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreActividadKeyTyped
         // TODO add your handling code here:
@@ -411,18 +443,36 @@ public class AgregarActividad extends javax.swing.JFrame {
 
     private void jComboBoxInicioMinutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioMinutosActionPerformed
         // TODO add your handling code here:
-        mismaHora(Integer.parseInt(jComboBoxInicioMinutos.getSelectedItem().toString()));
+        if("20".equals(jComboBoxHoraFin.getSelectedItem().toString())){
+            mismaHora(jComboBoxInicioMinutos.getSelectedIndex()+minutoActual);
+        } else {
+        }
     }//GEN-LAST:event_jComboBoxInicioMinutosActionPerformed
-    private void recorrerHoraComboBo(int index){
-        if(index==13){
-            jComboBoxHoraFin.removeAllItems();
+
+    private void jComboBoxAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAñoActionPerformed
+        // TODO add your handling code here:
+        llenaMes();
+    }//GEN-LAST:event_jComboBoxAñoActionPerformed
+
+    private void jComboBoxDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaActionPerformed
+        // TODO add your handling code here:
+        if(jComboBoxAño.getSelectedIndex()==0&&mesActual==jComboBoxMes.getSelectedIndex()+mesActual&&jComboBoxDia.getSelectedIndex()+diaHoy==diaHoy){
+            llenaHoraInicio(horaActual);           
+        }
+        else{
+            llenaHoraInicio(7);
+        }
+        
+    }//GEN-LAST:event_jComboBoxDiaActionPerformed
+    private void recorrerHoraComboBo(int horaSelecionada){
+        jComboBoxHoraFin.removeAllItems();
+        if(horaSelecionada==20){
             jComboBoxHoraFin.addItem(20);
             mismaHora(Integer.parseInt(jComboBoxInicioMinutos.getSelectedItem().toString()));
         }
         else{
-            jComboBoxHoraFin.removeAllItems();
-        for(int i=index+1; i<=13;i++){
-            jComboBoxHoraFin.addItem(i+7);
+        for(int i=horaSelecionada+1; i<=21;i++){
+            jComboBoxHoraFin.addItem(i);
             }
         mismaHora(-1);
         }
@@ -435,7 +485,7 @@ public class AgregarActividad extends javax.swing.JFrame {
     }
     private void mostrarCursos() throws SQLException{
         List<Curso> listaCursos = new ArrayList();
-        listaCursos=actividadDao.mostrarCursos();
+        listaCursos=cursoDao.mostrarCursos();
         for(int i=0; i<listaCursos.size();i++){
            jComboBoxCurso.addItem(listaCursos.get(i).getNombreCurso());
         }
@@ -463,11 +513,66 @@ public class AgregarActividad extends javax.swing.JFrame {
         if(areaDeseada.getText().length() >= numeroLimitar )
             evt.consume();
     }
+    private void mesLargo(int mesSeleccionado){
+        jComboBoxDia.removeAllItems();
+        if(mesSeleccionado==0||mesSeleccionado==2||mesSeleccionado==4||mesSeleccionado==6||mesSeleccionado==7||mesSeleccionado==11||mesSeleccionado==9){
+           llenaDias(31);
+        }
+        else{
+           if(mesSeleccionado==1){
+            llenaDias(28);            
+           }
+           else
+               llenaDias(30);        
+        }
+        
+    }
+    private void llenaDias(int dias){
+        jComboBoxDia.removeAllItems();
+        int diaInicio=1;
+        if(jComboBoxAño.getSelectedIndex()==0&&mesActual==jComboBoxMes.getSelectedIndex()+mesActual){
+                diaInicio=calendario.get(Calendar.DAY_OF_MONTH);
+        }
+        for(int i=diaInicio; i<=dias;i++){
+            jComboBoxDia.addItem(i);
+        }
+        jComboBoxDia.updateUI();
+    }
+    private void llenaMes(){
+        if(jComboBoxAño.getSelectedIndex()==1){
+            jComboBoxMes.removeAllItems();
+            for(int i=1;i<=12;i++){
+                jComboBoxMes.addItem(i);
+            }
+            
+        }else{
+            jComboBoxMes.removeAllItems();
+            for(int i=mesActual+1;i<=12;i++){
+                jComboBoxMes.addItem(i);
+            }
+        }
+        jComboBoxMes.updateUI();
+    }
+    private void llenaHoraInicio(int horaInicio){
+        jComboBoxInicioHora.removeAllItems();
+        for(int i=horaInicio;i<21;i++){
+            jComboBoxInicioHora.addItem(i);
+        }
+        jComboBoxInicioHora.updateUI();
+    }
+    private void llenaMinutosInicio(int minutoInicio){
+        jComboBoxInicioMinutos.removeAllItems();
+        for(int i=minutoInicio;i<60;i++){
+            jComboBoxInicioMinutos.addItem(i);
+        }
+        jComboBoxInicioMinutos.updateUI();
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -490,6 +595,7 @@ public class AgregarActividad extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AgregarActividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -504,6 +610,7 @@ public class AgregarActividad extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JComboBox jComboBoxArea;
+    private javax.swing.JComboBox jComboBoxAño;
     private javax.swing.JComboBox jComboBoxCupo;
     private javax.swing.JComboBox jComboBoxCurso;
     private javax.swing.JComboBox jComboBoxDia;
@@ -529,7 +636,6 @@ public class AgregarActividad extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelAgregarACtividad;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaDetalles;
-    private javax.swing.JTextField jTextFieldAño;
     private javax.swing.JTextField jTextFieldNombreActividad;
     // End of variables declaration//GEN-END:variables
 

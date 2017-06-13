@@ -129,12 +129,16 @@ public class ReservacionDAO{
     public boolean eliminarReservacion(Reservacion reservacion){
         boolean reservacionEliminada = false;
         ConexionBD conexionMysql = new ConexionBD();
+        ActividadDAO actividadDao = new ActividadDAO();
         try {
             conexionMysql.conectar();
+            Actividad actividad = new Actividad();
+            actividad.setIdActividad(actividadDao.obtenerIdActividad(reservacion.getActividad()));
             PreparedStatement sentencia = conexionMysql.conexion.prepareStatement("delete from reservacion where idReservacion =?");
             sentencia.setString(1, reservacion.getIdReservacion());
             if(sentencia.executeUpdate() == 1){
                 reservacionEliminada = true;
+                actividadDao.actualizarCupoDeActividad(actividad);
             }
             conexionMysql.cerrarConexion();
         } catch (SQLException e) {

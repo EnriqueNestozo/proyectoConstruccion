@@ -8,6 +8,7 @@ package gui;
 import businesslogic.Actividad;
 import businesslogic.Curso;
 import businesslogic.DAOClasses.ActividadDAO;
+import businesslogic.DAOClasses.CursoDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -177,18 +178,19 @@ public class EliminarActividad extends javax.swing.JFrame {
     private void mostrarActividades(String curso) throws SQLException{
         jComboBoxActividad.removeAllItems();
         jComboBoxActividad.addItem("seleccione una actividad");
+        CursoDAO cursoDao = new CursoDAO();
         ActividadDAO actividadDao = new ActividadDAO();
         List<Actividad> listaActividades = new ArrayList();
-        listaActividades=actividadDao.mostrarActividadIdioma(actividadDao.obtenerIdCurso(curso));
+        listaActividades=actividadDao.mostrarActividadIdioma(cursoDao.obtenerIdCurso(curso));
         for(int i=0; i<listaActividades.size();i++){
             jComboBoxActividad.addItem(listaActividades.get(i).getNombreActividad());
         }
         jComboBoxActividad.updateUI();
     }
     private void mostrarCursos() throws SQLException{
-        ActividadDAO actividadDao = new ActividadDAO();
+        CursoDAO cursoDao = new CursoDAO();
         List<Curso> listaCursos = new ArrayList();
-        listaCursos=actividadDao.mostrarCursos();
+        listaCursos=cursoDao.mostrarCursos();
         for(int i=0; i<listaCursos.size();i++){
            jComboBoxCurso.addItem(listaCursos.get(i).getNombreCurso());
         }
@@ -244,6 +246,7 @@ public class EliminarActividad extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EliminarActividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -23,7 +23,7 @@ public class ReservacionDAOTest {
     }
 
     /**
-     * Test of crear method, of class ReservacionDAO.
+     * Test of crearReservacion method, of class ReservacionDAO.
      */
     @Test
     public void testCrear() {
@@ -32,7 +32,7 @@ public class ReservacionDAOTest {
         Actividad actividad = null;
         ReservacionDAO instance = new ReservacionDAO();
         boolean expResult = false;
-        boolean result = instance.crear(alumno, actividad);
+        boolean result = instance.crearReservacion(alumno, actividad);
         assertEquals(expResult, result);
     }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package businesslogic.DAOClasses;
 
 import businesslogic.Actividad;
@@ -17,108 +12,145 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Enrique
+ * Clase que realiza las acciones para la clase Actividad.
+ * Recibe los parámetros de la gui y en base a ellos abre la conexión a la base de datos y realiza las operaciones.
+ * @author Jesús Enrique Flores Nestozo
+ * @author Fernando Manuel Guzmán Aja
+ * @version 1.7
  */
-public class ActividadDAO extends ConexionBD{
+public class ActividadDAO{
     public ActividadDAO() {
     }
     
-public boolean guardaActividad(Actividad actividad,String idCurso) throws SQLException{
-    boolean guardada=false;
-    this.conectar();
-    PreparedStatement sentencia=this.conexion.prepareStatement("INSERT INTO actividad VALUES (?,?,?,?,?,?,?,?,?,?)");
-    sentencia.setString(1,null);
-    sentencia.setString(2,actividad.getNombreActividad());
-    sentencia.setString(3,actividad.getDescripcion());
-    sentencia.setString(4,actividad.getCupo());
-    sentencia.setString(5,actividad.getFechaActividad());
-    sentencia.setString(6,null);
-    sentencia.setString(7,actividad.getHoraInicio());
-    sentencia.setString(8,actividad.getHoraFin());
-    sentencia.setString(9, actividad.getArea());
-    sentencia.setString(10,idCurso);
-    if(sentencia.executeUpdate()==1){
-
-        guardada=true;
-       }
-    this.cerrarConexion();
-    return guardada;
-        
+    /**
+     * 
+     * @param actividad
+     * @param idCurso
+     * @return
+     * @throws SQLException 
+     */
+    public boolean guardaActividad(Actividad actividad,String idCurso) throws SQLException{
+        boolean guardada=false;
+        ConexionBD conexionMysql = new ConexionBD();
+        conexionMysql.conectar();
+        PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("INSERT INTO actividad VALUES (?,?,?,?,?,?,?,?,?,?)");
+        sentencia.setString(1,null);
+        sentencia.setString(2,actividad.getNombreActividad());
+        sentencia.setString(3,actividad.getDescripcion());
+        sentencia.setInt(4,actividad.getCupo());
+        sentencia.setString(5,actividad.getFechaActividad());
+        sentencia.setString(6,null);
+        sentencia.setString(7,actividad.getHoraInicio());
+        sentencia.setString(8,actividad.getHoraFin());
+        sentencia.setString(9, actividad.getArea());
+        sentencia.setString(10,idCurso);
+        if(sentencia.executeUpdate()==1){
+            guardada=true;
+        }
+        conexionMysql.cerrarConexion();
+        return guardada;    
     }
-public boolean validar(Actividad actividad){
-    boolean estaVacia=false;
-    if(actividad.getArea().isEmpty())
-        estaVacia=true;
-    if(actividad.getCupo().isEmpty())
-        estaVacia=true;
-    if(actividad.getDescripcion().isEmpty())
-        estaVacia=true;
-    if(actividad.getFechaActividad().isEmpty())
-       estaVacia=true;
-    if(actividad.getHoraFin().isEmpty())
-        estaVacia=true;
-    if(actividad.getHoraInicio().isEmpty())
-        estaVacia=true;
-    if(actividad.getIdActividad().isEmpty())
-        estaVacia=true;
-    if(actividad.getNombreActividad().isEmpty())
-        estaVacia=true;      
-    return estaVacia;    
-}
-public String obtenerIdActividad(String actividad) throws SQLException{
-    ResultSet resultado = null;
-    try{
-        this.conectar();
-        PreparedStatement sentencia=this.conexion.prepareStatement("select idACtividad from actividad where nombre = ?");
-        sentencia.setString(1, actividad);
-        resultado=sentencia.executeQuery();
-        resultado.next();
-     this.cerrarConexion();
+    
+    /**
+     * 
+     * @param actividad
+     * @return 
+     */
+    public boolean validar(Actividad actividad){
+        boolean estaVacia=false;
+        if(actividad.getArea().isEmpty())
+            estaVacia=true;
+        if(actividad.getCupo() != 0)
+            estaVacia=true;
+        if(actividad.getDescripcion().isEmpty())
+            estaVacia=true;
+        if(actividad.getFechaActividad().isEmpty())
+           estaVacia=true;
+        if(actividad.getHoraFin().isEmpty())
+            estaVacia=true;
+        if(actividad.getHoraInicio().isEmpty())
+            estaVacia=true;
+        if(actividad.getIdActividad().isEmpty())
+            estaVacia=true;
+        if(actividad.getNombreActividad().isEmpty())
+            estaVacia=true;      
+        return estaVacia;    
+    }
+    
+    /**
+     * 
+     * @param actividad
+     * @return
+     * @throws SQLException 
+     */
+    public String obtenerIdActividad(String actividad) throws SQLException{
+        ResultSet resultado = null;
+        ConexionBD conexionMysql = new ConexionBD();
+        try{
+            conexionMysql.conectar();
+            PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select idACtividad from actividad where nombre = ?");
+            sentencia.setString(1, actividad);
+            resultado=sentencia.executeQuery();
+            resultado.next();
+         conexionMysql.cerrarConexion();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return resultado.getString("idActividad");
+    }
+    
+    /**
+     * 
+     * @param idActividad
+     * @return 
+     */
+    public boolean borrarActividad(String idActividad){
+        boolean borrado=false;
+        ConexionBD conexionMysql = new ConexionBD();
+        try{
+            conexionMysql.conectar();
+            PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("delete from actividad where idACtividad = ?");
+            sentencia.setString(1, idActividad);
+            if(!sentencia.execute()){
+                borrado=true;}
+            conexionMysql.cerrarConexion();
     }catch(SQLException e){
-        System.out.println(e);
+            System.out.println(e);
+        }
+        return borrado;
     }
-    return resultado.getString("idActividad");
-}
-public boolean borrarActividad(String idActividad){
-    boolean borrado=false;
-    try{
-        this.conectar();
-        PreparedStatement sentencia=this.conexion.prepareStatement("delete from actividad where idACtividad = ?");
-        sentencia.setString(1, idActividad);
-        if(!sentencia.execute()){
-            borrado=true;}
-        this.cerrarConexion();
-}catch(SQLException e){
-        System.out.println(e);
-    }
-    return borrado;
-}
 
-public String obtenerMaxIdActividad() throws SQLException{
-    int idActividad=0;
-    ResultSet resultado = null;
-    try{
-        this.conectar();
-        PreparedStatement sentencia=this.conexion.prepareStatement("select max(idActividad) as id from actividad");
-        resultado=sentencia.executeQuery();
-        resultado.next();
-        idActividad =Integer.parseInt(resultado.getString("id"))+1 ;
-     this.cerrarConexion();
-    }catch(SQLException e){
-        System.out.println(e);
+    /**
+     * 
+     * @return
+     * @throws SQLException 
+     */
+    public String obtenerMaxIdActividad() throws SQLException{
+        int idActividad=0;
+        ResultSet resultado = null;
+        ConexionBD conexionMysql = new ConexionBD();
+        try{
+            conexionMysql.conectar();
+            PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select max(idActividad) as id from actividad");
+            resultado=sentencia.executeQuery();
+            resultado.next();
+            idActividad =Integer.parseInt(resultado.getString("id"))+1 ;
+         conexionMysql.cerrarConexion();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return String.valueOf(idActividad);
     }
-    return String.valueOf(idActividad);
-}
 public String obtenerIdCurso(String nombreCurso) throws SQLException{
     ResultSet resultado=null;
+    ConexionBD conexionMysql = new ConexionBD();
     try{
-        this.conectar();
-        PreparedStatement sentencia=this.conexion.prepareStatement("select idCurso from curso where nombre = ?");
+        conexionMysql.conectar();
+        PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select idCurso from curso where nombre = ?");
         sentencia.setString(1, nombreCurso);
         resultado = sentencia.executeQuery();
         resultado.next();
-        this.cerrarConexion();
+        conexionMysql.cerrarConexion();
     }catch(SQLException e){
         System.out.println(e);
     }   
@@ -126,9 +158,10 @@ public String obtenerIdCurso(String nombreCurso) throws SQLException{
     }
 public List<Curso>mostrarCursos() throws SQLException{
     List<Curso> listaCursos = new ArrayList();
+    ConexionBD conexionMysql = new ConexionBD();
     try{
-        this.conectar(); 
-        PreparedStatement sentencia=this.conexion.prepareStatement("select * from curso");
+        conexionMysql.conectar(); 
+        PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select * from curso");
         ResultSet resultado =sentencia.executeQuery();
         while(resultado.next()){
             Curso curso = new Curso();
@@ -143,9 +176,10 @@ public List<Curso>mostrarCursos() throws SQLException{
 }
 public List<Area>mostrarAreas() throws SQLException{
     List<Area> listaAreas = new ArrayList();
+    ConexionBD conexionMysql = new ConexionBD();
     try{
-        this.conectar(); 
-        PreparedStatement sentencia=this.conexion.prepareStatement("select * from area");
+        conexionMysql.conectar(); 
+        PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select * from area");
         ResultSet resultado =sentencia.executeQuery();
         while(resultado.next()){
             Area area = new Area();
@@ -158,31 +192,51 @@ public List<Area>mostrarAreas() throws SQLException{
                 }
         return listaAreas;
     }            
-public List<Actividad> mostrarActividadIdioma(String idioma) throws SQLException{
-    List<Actividad> listaActividadIdioma = new ArrayList();
-    try{
-        this.conectar();
-        PreparedStatement sentencia = this.conexion.prepareStatement("select * from actividad where idCurso = ?");
-        sentencia.setString(1, idioma);
-        ResultSet resultado =sentencia.executeQuery();
-        while(resultado.next()){
-            Actividad actividad = new Actividad();
-            actividad.setNombreActividad(resultado.getString("nombre"));
-            listaActividadIdioma.add(actividad);
-        }
-    }catch(SQLException e){
-        System.out.println(e.getMessage());
-    }
-    this.cerrarConexion();
-return listaActividadIdioma;
-}
-
-
-public List<Actividad> mostrarActividades(Alumno usuarioAlumno){
-    List<Actividad> listaDeReservacion = new ArrayList();
+    public List<Actividad> mostrarActividadIdioma(String idioma) throws SQLException{
+        List<Actividad> listaActividadIdioma = new ArrayList();
+        ConexionBD conexionMysql = new ConexionBD();
         try{
-            this.conectar();
-            PreparedStatement sentencia = this.conexion.prepareStatement("select DISTINCT actividad.idActividad, actividad.nombre, actividad.descripcion, actividad.cupo,"
+            conexionMysql.conectar();
+            PreparedStatement sentencia = conexionMysql.conexion.prepareStatement("select * from actividad where idCurso = ?");
+            sentencia.setString(1, idioma);
+            ResultSet resultado =sentencia.executeQuery();
+            while(resultado.next()){
+                Actividad actividad = new Actividad();
+                actividad.setNombreActividad(resultado.getString("nombre"));
+                listaActividadIdioma.add(actividad);
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        conexionMysql.cerrarConexion();
+    return listaActividadIdioma;
+    }
+    
+    public void actualizarCupoDeActividad(Actividad actividad){
+        ConexionBD conexionMysql = new ConexionBD();
+        try {
+            conexionMysql.conectar();
+            PreparedStatement sentencia = conexionMysql.conexion.prepareStatement("update actividad set cupo = ? where idCurso = ?");
+            sentencia.setInt(1, actividad.getCupo());
+            sentencia.setString(2, actividad.getIdActividad());
+            System.out.println(sentencia.executeUpdate());
+        } catch (Exception e) {
+            System.out.println("No se pudo actualizar el cupo de la actividad" + e.getMessage());
+        }
+    }
+
+    /**
+     * Método que accesa a la base de datos y de acuerdo al alumno devuelve una lista de actividades a las cuales
+     * el alumno puede hacer una reservación.
+     * @param usuarioAlumno el objeto alumno del cual se quieren desplegar la lista de actividades.
+     * @return lista de objetos de tipo actividad
+     */
+    public List<Actividad> mostrarActividades(Alumno usuarioAlumno){
+        List<Actividad> listaDeReservacion = new ArrayList();
+        ConexionBD conexionMysql = new ConexionBD();
+        try{
+            conexionMysql.conectar();
+            PreparedStatement sentencia = conexionMysql.conexion.prepareStatement("select DISTINCT actividad.idActividad, actividad.nombre, actividad.descripcion, actividad.cupo,"
             + " actividad.fechaActividad, actividad.idAsesor, actividad.horaInicio, actividad.horaFin, actividad.numeroArea, actividad.idCurso"
             + " from actividad, seccion, curso, inscripcion, asesor, alumno WHERE inscripcion.matricula = ?"
             + " AND actividad.idCurso = seccion.idCurso AND inscripcion.nrc = seccion.nrc ORDER BY idActividad");
@@ -193,7 +247,7 @@ public List<Actividad> mostrarActividades(Alumno usuarioAlumno){
                 actividad.setIdActividad(resultado.getString("idActividad"));
                 actividad.setNombreActividad(resultado.getString("nombre"));
                 actividad.setDescripcion(resultado.getString("descripcion"));
-                actividad.setCupo(resultado.getString("cupo"));
+                actividad.setCupo(resultado.getInt("cupo"));
                 actividad.setArea(resultado.getString("numeroArea"));
                 actividad.setFechaActividad(resultado.getString("fechaActividad"));
                 actividad.setHoraInicio(resultado.getString("horaInicio"));
@@ -202,10 +256,10 @@ public List<Actividad> mostrarActividades(Alumno usuarioAlumno){
                 actividad.setIdCurso(resultado.getString("idCurso"));
                 listaDeReservacion.add(actividad);
             }
-            this.cerrarConexion();
+            conexionMysql.cerrarConexion();
         }catch(SQLException e){
-            System.out.println(e.getMessage());
+            System.out.println("No se pudo obtener la lista de actividades" + e.getMessage());
         }
-    return listaDeReservacion;
-} 
+        return listaDeReservacion;
+    } 
 }

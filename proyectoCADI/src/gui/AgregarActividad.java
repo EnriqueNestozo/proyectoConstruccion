@@ -372,7 +372,7 @@ public class AgregarActividad extends javax.swing.JFrame {
             Actividad actividad = new Actividad(TextFieldIDActividad.getText(), 
                  jTextFieldNombreActividad.getText(),
                  jTextAreaDetalles.getText(), 
-                 jComboBoxCupo.getSelectedItem().toString(),
+                 jComboBoxCupo.getSelectedIndex(),
                  jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),
                  jComboBoxHoraFin.getSelectedItem().toString()+":"+jComboBoxMinutosFin.getSelectedItem().toString(),
                  jTextFieldAño.getText()+"-"+jComboBoxMes.getSelectedItem().toString()+"-"+jComboBoxDia.getSelectedItem().toString()+" "+jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),

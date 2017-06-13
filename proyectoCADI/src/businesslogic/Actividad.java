@@ -1,22 +1,22 @@
 
 package businesslogic;
-
 /**
- *
+ *Esta clase crea el objeto actividad la cual contiene los datos de las actividades con sus respectivos getters y setters
  * @author Enrique
+ * @version 1.0
  */
 public class Actividad {
     private String idActividad = "";
     private String nombreActividad = "";
     private String descripcion = "";
-    private String cupo = "";
+    private int cupo = 0;
     private String horaInicio = "";
     private String horaFin = "";
     private String fechaActividad = "";
     private String area = "";
     private String idCurso = "";
 
-    public Actividad(String idActividad,String nombreActividad,String descripcion,String cupo,String horaInicio,String horaFin,String fechaActividad,String area) {
+    public Actividad(String idActividad,String nombreActividad,String descripcion,int cupo,String horaInicio,String horaFin,String fechaActividad,String area) {
         this.idActividad = idActividad;
         this.nombreActividad = nombreActividad;
          this.descripcion = descripcion;
@@ -52,7 +52,7 @@ public class Actividad {
         return descripcion;
     }
 
-    public String getCupo() {
+    public int getCupo() {
         return cupo;
     }
 
@@ -84,7 +84,7 @@ public class Actividad {
         this.descripcion = descripcion;
     }
 
-    public void setCupo(String cupo) {
+    public void setCupo(int cupo) {
         this.cupo = cupo;
     }
 

@@ -389,7 +389,7 @@ public class AgregarActividad extends javax.swing.JFrame {
             Actividad actividad = new Actividad(TextFieldIDActividad.getText(), 
                  jTextFieldNombreActividad.getText(),
                  jTextAreaDetalles.getText(), 
-                 jComboBoxCupo.getSelectedItem().toString(),
+                 jComboBoxCupo.getSelectedIndex(),
                  jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),
                  jComboBoxHoraFin.getSelectedItem().toString()+":"+jComboBoxMinutosFin.getSelectedItem().toString(),
                  jComboBoxAño.getSelectedItem().toString()+"-"+jComboBoxMes.getSelectedItem().toString()+"-"+jComboBoxDia.getSelectedItem().toString()+" "+jComboBoxInicioHora.getSelectedItem().toString()+":"+jComboBoxInicioMinutos.getSelectedItem().toString(),
@@ -594,6 +594,7 @@ public class AgregarActividad extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AgregarActividad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package businesslogic;
 
-/**
- *
- * @author Enrique
+/*
+ * Esta clase crea el objeto Asesor con sus respectivos atributos
+ * @version 1.0
+ * @author Jesus Enrique Flores Nestozo
  */
 public class Asesor {
     private String idEmpleado = "";

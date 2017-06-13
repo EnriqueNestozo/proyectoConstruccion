@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package businesslogic;
 
 /**
- *
- * @author Enrique
+ * Clase que crea el objeto Inscripcion con sus respectivos atributos.
+ * @author Jesús Enrique Flores Nestozo
+ * @version 1.0
  */
 public class Inscripcion {
     private String idInscripcion = "";

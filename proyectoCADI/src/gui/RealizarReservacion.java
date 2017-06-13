@@ -51,7 +51,7 @@ public class RealizarReservacion extends javax.swing.JFrame {
         if(jComboBoxActividades.getSelectedItem().toString() != "Seleccione actividad"){
             jLabelIdActividad.setText(listaDeActividades.get(opcionSeleccionada).getIdActividad());
             jLabelNombre.setText(listaDeActividades.get(opcionSeleccionada).getNombreActividad());
-            jLabelCupo.setText(listaDeActividades.get(opcionSeleccionada).getCupo());
+            jLabelCupo.setText(String.valueOf(listaDeActividades.get(opcionSeleccionada).getCupo()));
             jLabelFecha.setText(listaDeActividades.get(opcionSeleccionada).getFechaActividad());
             jLabelHoraInicio.setText(listaDeActividades.get(opcionSeleccionada).getHoraInicio());
             jLabelHoraFin.setText(listaDeActividades.get(opcionSeleccionada).getHoraFin());
@@ -349,7 +349,7 @@ public class RealizarReservacion extends javax.swing.JFrame {
             if(reservacion.buscarReservacion(alumno,listaDeActividades.get(jComboBoxActividades.getSelectedIndex() - 1))){
                 JOptionPane.showMessageDialog(null, "El alumno ya cuenta con la reservacion a la actividad");
             }else{
-                if(reservacion.crear(alumno, listaDeActividades.get(jComboBoxActividades.getSelectedIndex() - 1))){
+                if(reservacion.crearReservacion(alumno, listaDeActividades.get(jComboBoxActividades.getSelectedIndex() - 1))){
                     JOptionPane.showMessageDialog(null, "Actividad Reservada");
                 }
             }

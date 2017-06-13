@@ -1,9 +1,9 @@
-
 package businesslogic;
 
 /**
- *
- * @author Enrique
+ * Clase que crea el objeto de alumno con su respectivos atributos
+ * @author Jesús Enrique Flores Nestozo
+ * @version 1.0
  */
 public class Alumno {
     private String matricula = "";

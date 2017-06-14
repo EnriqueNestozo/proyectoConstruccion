@@ -8,31 +8,20 @@
  */
 package dataaccess;
 
-import businesslogic.Actividad;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Construcctor de la clase
  * @author Jesús Enrique Flores Nestozo
  */
 public class ConexionBD {
-<<<<<<< HEAD
-    private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static String BD_URL = "jdbc:mysql://localhost/cadi";
-    private static String USUARIO = "root";
-    private static String CONTRASENIA = "asmodeus";
-    protected Connection conexion;
-    private Statement estado;
-=======
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DIRECCION_DE_BASE_DE_DATOS = "jdbc:mysql://localhost/cadi";
-    private static final String USUARIO = "CADI_USER";
-    private static final String CONTRASENIA = "nestozo";
+    private static final String USUARIO = "root";
+    private static final String CONTRASENIA = "asmodeus";
     public Connection conexion;
->>>>>>> 7998acc809af373cb1357cb266b68ec731fb77c7
     boolean estadoDeConexion = false;
 
     /**

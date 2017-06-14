@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 import businesslogic.DAOClasses.CursoDAO;
 import businesslogic.Actividad;
 import businesslogic.Area;
 import businesslogic.Curso;
 import businesslogic.DAOClasses.ActividadDAO;
+import businesslogic.DAOClasses.AreaDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,12 +16,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.util.GregorianCalendar;
 /**
- *
+ *Clase interfaz para guardar una nueva actividad
  * @author fernandomanuel
+ * @version 1.10
  */
 public class AgregarActividad extends javax.swing.JFrame {
     ActividadDAO actividadDao = new ActividadDAO();
     CursoDAO cursoDao = new CursoDAO();
+    AreaDAO areaDao = new AreaDAO();
     String idActividad;
     String idCurso;
     Calendar calendario;
@@ -363,7 +361,10 @@ public class AgregarActividad extends javax.swing.JFrame {
     private void jTextFieldNombreActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActividadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNombreActividadActionPerformed
-
+    /**
+     * Este combo box reacciona al combo box año y segun lo seleccionado manda nuevos parametros al comboBox dia
+     * @param evt 
+     */
     private void jComboBoxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMesActionPerformed
         // TODO add your handling code here:
         if(jComboBoxAño.getSelectedIndex()==0){
@@ -372,7 +373,10 @@ public class AgregarActividad extends javax.swing.JFrame {
             mesLargo(jComboBoxMes.getSelectedIndex());
         }
     }//GEN-LAST:event_jComboBoxMesActionPerformed
-
+    /**
+     * cancela la operacion de guardar
+     * @param evt 
+     */
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -381,7 +385,10 @@ public class AgregarActividad extends javax.swing.JFrame {
     private void jComboBoxCupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCupoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxCupoActionPerformed
-
+    /**
+     * Este boton Genera la instancia de Actividad para proceder a guardala
+     * @param evt 
+     */
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
         try {
@@ -411,7 +418,11 @@ public class AgregarActividad extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
-
+    /**
+     * este comboBox reacciona al comboBox dia y lo llena de valores, 
+     * de igual manera manda los parametros al comboBox horaFin
+     * @param evt 
+     */
     private void jComboBoxInicioHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioHoraActionPerformed
         // TODO add your handling code here:
         if(jComboBoxAño.getSelectedIndex()==0&&mesActual==jComboBoxMes.getSelectedIndex()+mesActual&&jComboBoxDia.getSelectedIndex()+diaHoy==diaHoy&&jComboBoxInicioHora.getSelectedIndex()+horaActual==horaActual){
@@ -435,12 +446,16 @@ public class AgregarActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
         numeroCaracteres(evt,jTextFieldNombreActividad,50);
     }//GEN-LAST:event_jTextFieldNombreActividadKeyTyped
-
+    
     private void jTextAreaDetallesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaDetallesKeyTyped
         // TODO add your handling code here:
         numeroCaracteresTextArea(evt, jTextAreaDetalles, 250);
     }//GEN-LAST:event_jTextAreaDetallesKeyTyped
-
+    /**
+     * combo box que reacciona a combo box hora fin y le manda nuevos parametros a si mismo
+     * @param evt 
+     */
+    
     private void jComboBoxInicioMinutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInicioMinutosActionPerformed
         // TODO add your handling code here:
         if("20".equals(jComboBoxHoraFin.getSelectedItem().toString())){
@@ -448,12 +463,18 @@ public class AgregarActividad extends javax.swing.JFrame {
         } else {
         }
     }//GEN-LAST:event_jComboBoxInicioMinutosActionPerformed
-
+    /**
+     * este combo box manda parametros llena comboBox mes
+     * @param evt 
+     */
     private void jComboBoxAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAñoActionPerformed
         // TODO add your handling code here:
         llenaMes();
     }//GEN-LAST:event_jComboBoxAñoActionPerformed
-
+    /**
+     * este combo box manda parametros a comboBoxhoraInicio 
+     * @param evt 
+     */
     private void jComboBoxDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaActionPerformed
         // TODO add your handling code here:
         if(jComboBoxAño.getSelectedIndex()==0&&mesActual==jComboBoxMes.getSelectedIndex()+mesActual&&jComboBoxDia.getSelectedIndex()+diaHoy==diaHoy){
@@ -464,6 +485,10 @@ public class AgregarActividad extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jComboBoxDiaActionPerformed
+    /**
+     * este metodo llena el ComboBox horaFin dependiendo la hora seleccionada en JCOMBOBOX inicio hora
+     * @param horaSelecionada 
+     */
     private void recorrerHoraComboBo(int horaSelecionada){
         jComboBoxHoraFin.removeAllItems();
         if(horaSelecionada==20){
@@ -478,11 +503,21 @@ public class AgregarActividad extends javax.swing.JFrame {
         }
         jComboBoxHoraFin.updateUI();
     }
+    /**
+     * metodo que limita el numero de caracteres en los textfield
+     * @param evt
+     * @param campoDeseado es el textfield donde se limitara
+     * @param numeroLimitar es el numero de caracteres maximo
+     */
     public static void numeroCaracteres(java.awt.event.KeyEvent evt, JTextField campoDeseado, int numeroLimitar){
         if(campoDeseado.getText().length() >= numeroLimitar )
             evt.consume();
         
     }
+    /**
+     * metodo que llena el comboBoxcursos con los cursos disponibles en la base de datos
+     * @throws SQLException 
+     */
     private void mostrarCursos() throws SQLException{
         List<Curso> listaCursos = new ArrayList();
         listaCursos=cursoDao.mostrarCursos();
@@ -492,9 +527,13 @@ public class AgregarActividad extends javax.swing.JFrame {
         jComboBoxCurso.updateUI();
         
     }
+   /**
+    * metodo que llena el comboBox area con las areas disponibles en base de datos
+    * @throws SQLException 
+    */
     private void obtenerArea() throws SQLException{
         List<Area> listaAreas = new ArrayList();
-        listaAreas=actividadDao.mostrarAreas();
+        listaAreas=areaDao.mostrarAreas();
         for(int i=0; i<listaAreas.size(); i++){
             jComboBoxArea.addItem(listaAreas.get(i).getNumeroArea());
 
@@ -502,6 +541,11 @@ public class AgregarActividad extends javax.swing.JFrame {
         jComboBoxArea.updateUI();
         
     }
+    /**
+     * metodo que preeve la actividad tenga por lo menos un minuto de tiempo si se inicia
+     * y acaba a la misma hora
+     * @param minuto es el minuto inicio seleccionado
+     */
     private void mismaHora(int minuto){
         jComboBoxMinutosFin.removeAllItems();
         for(int i=minuto+1; i<60; i++){
@@ -513,6 +557,10 @@ public class AgregarActividad extends javax.swing.JFrame {
         if(areaDeseada.getText().length() >= numeroLimitar )
             evt.consume();
     }
+    /**
+     * metodo que manda a llenar el  combo box dia dependiendo del mes seleccionado
+     * @param mesSeleccionado 
+     */
     private void mesLargo(int mesSeleccionado){
         jComboBoxDia.removeAllItems();
         if(mesSeleccionado==0||mesSeleccionado==2||mesSeleccionado==4||mesSeleccionado==6||mesSeleccionado==7||mesSeleccionado==11||mesSeleccionado==9){
@@ -527,6 +575,10 @@ public class AgregarActividad extends javax.swing.JFrame {
         }
         
     }
+    /**
+     * metodo que llena el combo box dia con los dias recibidos
+     * @param dias para llenar el combo box
+     */
     private void llenaDias(int dias){
         jComboBoxDia.removeAllItems();
         int diaInicio=1;
@@ -538,6 +590,9 @@ public class AgregarActividad extends javax.swing.JFrame {
         }
         jComboBoxDia.updateUI();
     }
+    /**
+     * metodo que llena el combo box mes dependiendo si esta en este año o en el siguiente
+     */
     private void llenaMes(){
         if(jComboBoxAño.getSelectedIndex()==1){
             jComboBoxMes.removeAllItems();
@@ -553,6 +608,11 @@ public class AgregarActividad extends javax.swing.JFrame {
         }
         jComboBoxMes.updateUI();
     }
+    /**
+     * metodo que llena el combo box hora inicio
+     * preeve que si la actividad es el dia de hoy empiece despues de la hora actual
+     * @param horaInicio hora a la que se debe empezar a llenar
+     */
     private void llenaHoraInicio(int horaInicio){
         jComboBoxInicioHora.removeAllItems();
         for(int i=horaInicio;i<21;i++){
@@ -560,6 +620,11 @@ public class AgregarActividad extends javax.swing.JFrame {
         }
         jComboBoxInicioHora.updateUI();
     }
+    /**
+     * Metodo que llena el combo box minuto incio
+     * preeve que si la actividad es el dia de hoy empiece despues del minuto actual
+     * @param minutoInicio 
+     */
     private void llenaMinutosInicio(int minutoInicio){
         jComboBoxInicioMinutos.removeAllItems();
         for(int i=minutoInicio;i<60;i++){

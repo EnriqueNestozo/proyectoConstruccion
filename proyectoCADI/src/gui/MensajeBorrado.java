@@ -6,8 +6,9 @@
 package gui;
 
 /**
- *
+ * clase que despliega la interfaz de confirmacion de mensaje borrado
  * @author fernandomanuel
+ * @vesion 1.0
  */
 public class MensajeBorrado extends javax.swing.JFrame {
 
@@ -81,7 +82,10 @@ public class MensajeBorrado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * cierra la confirmacion
+ * @param evt 
+ */
     private void jBotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAceptarActionPerformed
         // TODO add your handling code here:
         dispose();

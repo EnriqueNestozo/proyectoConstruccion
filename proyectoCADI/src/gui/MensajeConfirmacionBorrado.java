@@ -1,24 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
-
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Esta es la clase que despliega la pantalla para la confirmacion de borrar Actividad
  * @author fernandomanuel
+ * @version 1.2
  */
+
 public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
+    private final String actividad;
 
     /**
      * Creates new form MensajeConfirmacionBorrado
+     * @param actividad es el nombre de la actividad seleccionada por el usuario para borrarla
      */
-    public MensajeConfirmacionBorrado() {
+    public MensajeConfirmacionBorrado(String actividad) {
+        this.actividad = actividad; 
         initComponents();
         setVisible(true);
     }
@@ -101,24 +100,30 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+     /**
+      * crea una instancia de Eliminar actividad mandando a traer el metodo confirmacion borrar(true)
+      * @param evt 
+      */
     private void jBotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAceptarActionPerformed
         // TODO add your handling code here:
         
         EliminarActividad eliminar = new EliminarActividad();
         try {
-            eliminar.confirmacionBorrar(true);
+            eliminar.confirmacionBorrar(true,actividad);
         } catch (SQLException ex) {
             Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
     }//GEN-LAST:event_jBotonAceptarActionPerformed
-
+ /**
+  * crea una instancia de Eliminar actividad mandando a traer el metodo confirmacion borrar(false)
+  * @param evt 
+  */
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
         // TODO add your handling code here:
         EliminarActividad eliminar = new EliminarActividad();
         try {
-            eliminar.confirmacionBorrar(false);
+            eliminar.confirmacionBorrar(false,actividad);
         } catch (SQLException ex) {
             Logger.getLogger(MensajeConfirmacionBorrado.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -155,7 +160,6 @@ public class MensajeConfirmacionBorrado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MensajeConfirmacionBorrado().setVisible(true);
             }
         });
     }

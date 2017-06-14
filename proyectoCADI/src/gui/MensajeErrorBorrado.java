@@ -6,8 +6,9 @@
 package gui;
 
 /**
- *
+ *clase que despliega la interfaz en caso de que encuentre un error al borrar la actividad
  * @author fernandomanuel
+ * @version 1.0
  */
 public class MensajeErrorBorrado extends javax.swing.JFrame {
 

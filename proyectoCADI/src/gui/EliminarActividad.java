@@ -16,9 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Clase que crea la interfaz para borrar una activad
  * @author fernandomanuel
+ * @version 1.5
  */
+
 public class EliminarActividad extends javax.swing.JFrame {
 
     /**
@@ -153,16 +155,22 @@ public class EliminarActividad extends javax.swing.JFrame {
             Logger.getLogger(EliminarActividad.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBoxCursoActionPerformed
-
+    /**
+     * despliega la interfaz para confiramar borrar actividad
+     * @param evt 
+     */
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
         if(actividadSelecionada()){
-            new MensajeConfirmacionBorrado();
+            new MensajeConfirmacionBorrado(jComboBoxActividad.getSelectedItem().toString());
             dispose();
         }else{
             new MensajeSelecioneActividad();}
     }//GEN-LAST:event_jButtonEliminarActionPerformed
-
+/**
+ * cancela la operacion
+ * @param evt 
+ */
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -171,10 +179,11 @@ public class EliminarActividad extends javax.swing.JFrame {
     private void jComboBoxActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActividadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxActividadActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+/**
+ * Metodo que llena el combo box actividad dependiendo el curso seleccionado
+ * @param curso
+ * @throws SQLException 
+ */
     private void mostrarActividades(String curso) throws SQLException{
         jComboBoxActividad.removeAllItems();
         jComboBoxActividad.addItem("seleccione una actividad");
@@ -187,6 +196,10 @@ public class EliminarActividad extends javax.swing.JFrame {
         }
         jComboBoxActividad.updateUI();
     }
+    /**
+     * metodo que llena el combobox curso con los cursos disponibles en base de datos
+     * @throws SQLException 
+     */
     private void mostrarCursos() throws SQLException{
         CursoDAO cursoDao = new CursoDAO();
         List<Curso> listaCursos = new ArrayList();
@@ -197,17 +210,28 @@ public class EliminarActividad extends javax.swing.JFrame {
         jComboBoxCurso.updateUI();
         
     }
+    /**
+     * metodo que verifica que se seleccione una actividad para poder borrarla
+     * @return 
+     */
     private boolean actividadSelecionada(){
         boolean seleccionada=true;
         if("seleccione una actividad".equals(jComboBoxActividad.getSelectedItem().toString()))
             seleccionada=false;
         return seleccionada;
     }
-    public void confirmacionBorrar(boolean borrar) throws SQLException{
+    /**
+     * metodo que recibe la confirmacion para borrar y el nombre de la actividad seleccionada 
+     * hace coneccion con su clase dao para borrarla
+     * @param borrar
+     * @param actividad
+     * @throws SQLException 
+     */
+    public void confirmacionBorrar(boolean borrar,String actividad) throws SQLException{
         if(borrar){
             ActividadDAO actividadDao =new ActividadDAO();
             try {
-                if(actividadDao.borrarActividad(actividadDao.obtenerIdActividad(jComboBoxActividad.getSelectedItem().toString()))){
+                if(actividadDao.borrarActividad(actividadDao.obtenerIdActividad(actividad))){
                     dispose();
                     new MensajeBorrado();
                     

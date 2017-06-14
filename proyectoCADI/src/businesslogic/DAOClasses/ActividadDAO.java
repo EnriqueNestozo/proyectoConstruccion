@@ -2,8 +2,6 @@ package businesslogic.DAOClasses;
 
 import businesslogic.Actividad;
 import businesslogic.Alumno;
-import businesslogic.Area;
-import businesslogic.Curso;
 import dataaccess.ConexionBD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,53 +21,61 @@ public class ActividadDAO{
     }
     
     /**
-     * 
-     * @param actividad
-     * @param idCurso
-     * @return
+     * este metodo recibe una instancia de Actividad y un id curso para almacenar en base de datos
+     * @param actividad instancia de actividad
+     * @param idCurso string con id del curso
+     * @return guardada regresa un booleano confirmando si se guardo
      * @throws SQLException 
      */
     public boolean guardaActividad(Actividad actividad,String idCurso) throws SQLException{
-        boolean guardada=false;
-        ConexionBD conexionMysql = new ConexionBD();
-        conexionMysql.conectar();
-        PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("INSERT INTO actividad VALUES (?,?,?,?,?,?,?,?,?,?)");
-        sentencia.setString(1,null);
-        sentencia.setString(2,actividad.getNombreActividad());
-        sentencia.setString(3,actividad.getDescripcion());
-        sentencia.setInt(4,actividad.getCupo());
-        sentencia.setString(5,actividad.getFechaActividad());
-        sentencia.setString(6,null);
-        sentencia.setString(7,actividad.getHoraInicio());
-        sentencia.setString(8,actividad.getHoraFin());
-        sentencia.setString(9, actividad.getArea());
-        sentencia.setString(10,idCurso);
-        if(sentencia.executeUpdate()==1){
-            guardada=true;
+            boolean guardada=false;
+            ConexionBD conexionMysql = new ConexionBD();
+            conexionMysql.conectar();
+            PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("INSERT INTO actividad VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            sentencia.setString(1,null);
+            sentencia.setString(2,actividad.getNombreActividad());
+            sentencia.setString(3,actividad.getDescripcion());
+            sentencia.setInt(4,actividad.getCupo());
+            sentencia.setString(5,actividad.getFechaActividad());
+            sentencia.setString(6,null);
+            sentencia.setString(7,actividad.getHoraInicio());
+            sentencia.setString(8,actividad.getHoraFin());
+            sentencia.setString(9, actividad.getArea());
+            sentencia.setString(10,idCurso);
+            sentencia.setString(11,"1");
+            if(sentencia.executeUpdate()==1){
+                guardada=true;
+            }
+            conexionMysql.cerrarConexion();
+            return guardada;    
         }
-        conexionMysql.cerrarConexion();
-        return guardada;    
-    }
-<<<<<<< HEAD
-    return resultado.getString("idActividad");
-}
-public boolean borrarActividad(String idActividad){
-    boolean borrado=false;
-    try{
-        this.conectar();
-            PreparedStatement sentencia=this.conexion.prepareStatement(" UPDATE actividad SET estado= 0 WHERE idActividad = ?");
-        sentencia.setString(1, idActividad);
-        if(!sentencia.execute()){
-            borrado=true;}
-        this.cerrarConexion();
-}catch(SQLException e){
-        System.out.println(e);
-=======
-    
     /**
-     * 
+     * este metodo recibe un id de la actividad para borrarla entrando a base de datos
+     * @param idActividad string del id de la actividad
+     * @return borrado booleano regresa la confirmacion del metodo
+     * @throws SQLException 
+     * @version 1.2
+     */
+    public boolean borrarActividad(String idActividad)throws SQLException{
+        boolean borrado=false;
+        try{
+            ConexionBD conexionMysql = new ConexionBD();
+            conexionMysql.conectar();
+                PreparedStatement sentencia=conexionMysql.conexion.prepareStatement(" UPDATE actividad SET estado= 0 WHERE idActividad = ?");
+            sentencia.setString(1, idActividad);
+            if(!sentencia.execute()){
+                borrado=true;}
+            conexionMysql.cerrarConexion();
+    }catch(SQLException e){
+            System.out.println(e);
+    }
+        return borrado;
+    }
+    /**
+     * este metodo recibe una instancia de actividad y verifica que este lleno con todos sus parametros
+     * @version 1.0
      * @param actividad
-     * @return 
+     * @return estaVacia retorna un boleano donde confirma si esta vacia o no
      */
     public boolean validar(Actividad actividad){
         boolean estaVacia=false;
@@ -90,13 +96,12 @@ public boolean borrarActividad(String idActividad){
         if(actividad.getNombreActividad().isEmpty())
             estaVacia=true;      
         return estaVacia;    
->>>>>>> 7998acc809af373cb1357cb266b68ec731fb77c7
     }
     
     /**
-     * 
-     * @param actividad
-     * @return
+     * este metodo  obtiene un id de la actividad recibida
+     * @param actividad string de la actividad
+     * @return el id de la actividad
      * @throws SQLException 
      */
     public String obtenerIdActividad(String actividad) throws SQLException{
@@ -104,7 +109,7 @@ public boolean borrarActividad(String idActividad){
         ConexionBD conexionMysql = new ConexionBD();
         try{
             conexionMysql.conectar();
-            PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select idACtividad from actividad where nombre = ?");
+            PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select idActividad from actividad where nombre = ?");
             sentencia.setString(1, actividad);
             resultado=sentencia.executeQuery();
             resultado.next();
@@ -114,35 +119,11 @@ public boolean borrarActividad(String idActividad){
         }
         return resultado.getString("idActividad");
     }
-<<<<<<< HEAD
-    return String.valueOf(idActividad);
-}
-=======
-    
-    /**
-     * 
-     * @param idActividad
-     * @return 
-     */
-    public boolean borrarActividad(String idActividad){
-        boolean borrado=false;
-        ConexionBD conexionMysql = new ConexionBD();
-        try{
-            conexionMysql.conectar();
-            PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("delete from actividad where idACtividad = ?");
-            sentencia.setString(1, idActividad);
-            if(!sentencia.execute()){
-                borrado=true;}
-            conexionMysql.cerrarConexion();
-    }catch(SQLException e){
-            System.out.println(e);
-        }
-        return borrado;
-    }
 
     /**
-     * 
-     * @return
+     * este metodo obtiene de la base de datos el id maximo que existe para asignar el siguiente id a la nueva actividad por crear
+     * @return id de la proxima actividad
+     * version 1.4
      * @throws SQLException 
      */
     public String obtenerMaxIdActividad() throws SQLException{
@@ -161,27 +142,14 @@ public boolean borrarActividad(String idActividad){
         }
         return String.valueOf(idActividad);
     }
-
-
->>>>>>> 7998acc809af373cb1357cb266b68ec731fb77c7
-public List<Area>mostrarAreas() throws SQLException{
-    List<Area> listaAreas = new ArrayList();
-    ConexionBD conexionMysql = new ConexionBD();
-    try{
-        conexionMysql.conectar(); 
-        PreparedStatement sentencia=conexionMysql.conexion.prepareStatement("select * from area");
-        ResultSet resultado =sentencia.executeQuery();
-        while(resultado.next()){
-            Area area = new Area();
-            area.setNumeroArea(resultado.getString("numeroArea"));
-            area.setCapacidad(resultado.getString("capacidad"));
-            listaAreas.add(area);
-        }
-    }catch(SQLException e){
-                System.out.println(e);
-                }
-        return listaAreas;
-    }            
+    
+    /**
+     * este metodo creauna lista de Actividades dependiendo del idioma recibido
+     * @param idioma string del idioma seleccionado
+     * @version 1.2
+     * @return lista de las actividades por idioma
+     * @throws SQLException 
+     */
     public List<Actividad> mostrarActividadIdioma(String idioma) throws SQLException{
         List<Actividad> listaActividadIdioma = new ArrayList();
         ConexionBD conexionMysql = new ConexionBD();

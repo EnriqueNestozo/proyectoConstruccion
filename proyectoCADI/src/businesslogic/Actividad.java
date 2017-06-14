@@ -1,11 +1,7 @@
 
 package businesslogic;
-<<<<<<< HEAD
 
 import java.util.List;
-
-=======
->>>>>>> 7998acc809af373cb1357cb266b68ec731fb77c7
 /**
  *Esta clase crea el objeto actividad la cual contiene los datos de las actividades con sus respectivos getters y setters
  * @author Enrique
